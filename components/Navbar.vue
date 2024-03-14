@@ -1,16 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue"
 const links = [
-  { name: "Home", url: "#" },
-  { name: "About", url: "#" },
+  { name: "Home", url: "/" },
+  { name: "About", url: "/about" },
   { name: "My Contacts", url: "#" },
 ]
-
-const toggleMobileMenu = () => {
-  mobileMenuOpen.value = !mobileMenuOpen.value
-}
-
-const mobileMenuOpen = ref(false)
 </script>
 
 <template>
@@ -23,20 +16,12 @@ const mobileMenuOpen = ref(false)
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
-              <a
-                href="#"
+              <NuxtLink
+                v-for="link in links"
+                :key="link.name"
+                :href="link.url"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >Home</a
-              >
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >About</a
-              >
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >My Contacts</a
+                >{{ link.name }}</NuxtLink
               >
             </div>
           </div>

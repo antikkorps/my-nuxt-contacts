@@ -26,7 +26,10 @@ const links = [
             </div>
           </div>
         </div>
-        <button class="flex justify-end btn btn-primary">Login</button>
+        <div class="flex items-center">
+          <ToggleTheme />
+          <button class="flex justify-end btn btn-primary mx-2">Login</button>
+        </div>
       </div>
     </div>
   </nav>

@@ -26,6 +26,7 @@ const links = [
             </div>
           </div>
         </div>
+        <button class="flex justify-end btn btn-primary">Login</button>
       </div>
     </div>
   </nav>

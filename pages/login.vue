@@ -7,10 +7,10 @@ definePageMeta({
   <div class="hero min-h-screen bg-base-200">
     <div class="hero-content flex-col lg:flex-row-reverse">
       <div class="text-center lg:text-left">
-        <h1 class="text-5xl font-bold">Login now!</h1>
+        <h1 class="text-5xl font-bold">Connectez-vous maintenant!</h1>
         <p class="py-6">
-          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-          exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
+          Pour accéder à l'ensemble de vos contacts, connectez-vous maintenant et profitez
+          de les avoir tous au même endroit.
         </p>
       </div>
       <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -28,20 +28,20 @@ definePageMeta({
           </div>
           <div class="form-control">
             <label class="label">
-              <span class="label-text">Password</span>
+              <span class="label-text">Mot de passe</span>
             </label>
             <input
               type="password"
-              placeholder="password"
+              placeholder="Mot de passe"
               class="input input-bordered"
               required
             />
             <label class="label">
-              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+              <a href="#" class="label-text-alt link link-hover">Mot de passe oublié ?</a>
             </label>
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary">Login</button>
+            <button class="btn btn-primary">Se connecter</button>
           </div>
         </form>
       </div>

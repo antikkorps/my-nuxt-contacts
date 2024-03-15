@@ -28,7 +28,9 @@ const links = [
         </div>
         <div class="flex items-center">
           <ToggleTheme />
-          <button class="flex justify-end btn btn-primary mx-2">Login</button>
+          <button class="flex justify-end btn btn-primary mx-2">
+            <NuxtLink to="/login">Login</NuxtLink>
+          </button>
         </div>
       </div>
     </div>

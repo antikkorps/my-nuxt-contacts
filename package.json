@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@hebilicious/authjs-nuxt": "^0.3.5",
+    "@nuxt/image": "^1.4.0",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@types/bcrypt": "^5.0.2",

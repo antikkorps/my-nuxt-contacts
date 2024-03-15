@@ -37,7 +37,7 @@ const handleSignout = async () => {
           </div>
         </div>
         <div class="flex items-center">
-          <ToggleTheme mx-1 />
+          <ToggleTheme class="mx-1" />
           <Avatar v-if="session" class="hidden md:block" />
           <button v-if="!session" class="flex justify-end btn btn-primary mx-2">
             <NuxtLink href="/login">Login</NuxtLink>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } })
+const { session, user } = useAuth()
 const { data } = await useFetch("/api/v1/hello")
 </script>
 <template>
@@ -9,6 +10,9 @@ const { data } = await useFetch("/api/v1/hello")
       <p>Here are your contacts</p>
 
       <pre>{{ data }}</pre>
+      <pre>{{ session?.user }}</pre>
+      <pre>{{ session?.user.firstName }}</pre>
+      <pre>{{ session?.user.lastName }}</pre>
 
       <!-- <div v-if="data">
   <ul>

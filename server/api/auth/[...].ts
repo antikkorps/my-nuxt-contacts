@@ -48,7 +48,12 @@ export const authOptions: AuthConfig = {
         if (!isValid) {
           throw new Error("Invalid password")
         }
-        return { id: user.id, email: user.email }
+        return {
+          id: user.id,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        }
       },
     }),
     // GithubProvider({
@@ -56,6 +61,19 @@ export const authOptions: AuthConfig = {
     //   clientSecret: runtimeConfig.github.clientSecret
     // }),
   ],
+  callbacks: {
+    session: async ({ session, token, user }) => {
+      if (user) {
+        session.user = {
+          id: user.id,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        }
+      }
+      return session
+    },
+  },
 }
 
 export default NuxtAuthHandler(authOptions, runtimeConfig)

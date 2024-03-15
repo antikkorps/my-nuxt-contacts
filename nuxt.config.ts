@@ -3,7 +3,12 @@ import { resolve } from "node:path"
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@hebilicious/authjs-nuxt"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/color-mode",
+    "@hebilicious/authjs-nuxt",
+    "@nuxt/image"
+  ],
   alias: {
     cookie: resolve(__dirname, "node_modules/cookie"),
   },

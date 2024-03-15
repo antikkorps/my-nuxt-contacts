@@ -53,6 +53,7 @@ export const authOptions: AuthConfig = {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
+          avatar: user.avatar,
           role: user.role,
         }
       },
@@ -69,6 +70,7 @@ export const authOptions: AuthConfig = {
         token.email = user.email
         token.firstName = user.firstName
         token.lastName = user.lastName
+        token.avatar = user.avatar
         token.role = user.role
       }
       return token
@@ -85,6 +87,7 @@ export const authOptions: AuthConfig = {
       session.user.email = token.email as string
       session.user.firstName = token.firstName as string
       session.user.lastName = token.lastName as string
+      session.user.avatar = token.avatar as string
       session.user.role = token.role as string
       return session
     },

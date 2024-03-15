@@ -11,8 +11,6 @@ const { data } = await useFetch("/api/v1/hello")
 
       <pre>{{ data }}</pre>
       <pre>{{ session?.user }}</pre>
-      <pre>{{ session?.user.firstName }}</pre>
-      <pre>{{ session?.user.lastName }}</pre>
 
       <!-- <div v-if="data">
   <ul>

@@ -17,6 +17,9 @@ async function seed() {
       data: {
         email: "user1@example.com",
         password: await bcrypt.hash(password, 10),
+        firstName: "Tom",
+        lastName: "Doe",
+        avatar: "https://i.pravatar.cc/300",
       },
     })
 
@@ -24,6 +27,9 @@ async function seed() {
       data: {
         email: "user2@example.com",
         password: await bcrypt.hash(password, 10),
+        firstName: "Jane",
+        lastName: "Smith",
+        avatar: "https://i.pravatar.cc/300",
       },
     })
 

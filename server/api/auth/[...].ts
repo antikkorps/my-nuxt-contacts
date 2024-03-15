@@ -53,6 +53,7 @@ export const authOptions: AuthConfig = {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
+          role: user.role,
         }
       },
     }),
@@ -62,15 +63,29 @@ export const authOptions: AuthConfig = {
     // }),
   ],
   callbacks: {
-    session: async ({ session, token, user }) => {
+    jwt: async ({ token, user }) => {
       if (user) {
-        session.user = {
-          id: user.id,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        }
+        token.id = user.id
+        token.email = user.email
+        token.firstName = user.firstName
+        token.lastName = user.lastName
+        token.role = user.role
       }
+      return token
+    },
+    session: async ({ session, token }) => {
+      session.user = session.user || {
+        id: "",
+        firstName: "",
+        lastName: "",
+        avatar: "",
+        role: "",
+      }
+      session.user.id = token.id as string
+      session.user.email = token.email as string
+      session.user.firstName = token.firstName as string
+      session.user.lastName = token.lastName as string
+      session.user.role = token.role as string
       return session
     },
   },

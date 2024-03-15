@@ -1,3 +1,6 @@
+<script setup lang="ts">
+definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } })
+</script>
 <template>
   <div>
     <h1>This is the profile page of the current user</h1>

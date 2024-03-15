@@ -8,9 +8,10 @@ const { data } = await useFetch("/api/v1/hello")
     <h1 class="PageTitle">My Contacts</h1>
     <div class="px-4 sm:w-1/2 mx-auto">
       <p>Here are your contacts</p>
-
-      <pre>{{ data }}</pre>
-      <pre>{{ session?.user }}</pre>
+      <div class="w-full">
+        <pre>{{ data }}</pre>
+        <p>{{ session?.user }}</p>
+      </div>
 
       <!-- <div v-if="data">
   <ul>

@@ -22,7 +22,7 @@ const handleLoad = () => {
         />
         <div
           v-else
-          class="flex items-center justify-center h-full font-bold bg-primary rounded-full"
+          class="flex items-center btn-primary justify-center h-full font-bold bg-primary rounded-full"
         >
           {{ userInitials }}
         </div>

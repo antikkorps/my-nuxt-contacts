@@ -10,7 +10,7 @@ const handleSubmit = async () => {
       redirect: true,
       email: email.value,
       password: password.value,
-      callbackUrl: "/",
+      callbackUrl: "/mycontacts",
     })
     console.log("success")
   } catch (error) {

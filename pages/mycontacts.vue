@@ -1,4 +1,5 @@
 <script setup lang="ts">
+definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } })
 const { data } = await useFetch("/api/v1/hello")
 </script>
 <template>

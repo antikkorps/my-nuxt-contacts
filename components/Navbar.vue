@@ -1,9 +1,18 @@
 <script setup lang="ts">
+const { signOut } = useAuth()
 const links = [
   { name: "Home", url: "/" },
   { name: "About", url: "/about" },
-  { name: "My Contacts", url: "#" },
+  { name: "My Contacts", url: "/mycontacts" },
 ]
+const handleSignout = async () => {
+  try {
+    await signOut()
+    console.log("Sign out successfully!")
+  } catch (error) {
+    console.log("error", error)
+  }
+}
 </script>
 
 <template>
@@ -30,6 +39,9 @@ const links = [
           <ToggleTheme />
           <button class="flex justify-end btn btn-primary mx-2">
             <NuxtLink href="/login">Login</NuxtLink>
+          </button>
+          <button @click="handleSignout" class="flex justify-end btn btn-primary">
+            Logout
           </button>
         </div>
       </div>

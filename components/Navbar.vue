@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { signOut } = useAuth()
+const { signOut, session } = useAuth()
+
 const links = [
   { name: "Home", url: "/" },
   { name: "About", url: "/about" },
@@ -37,10 +38,14 @@ const handleSignout = async () => {
         </div>
         <div class="flex items-center">
           <ToggleTheme />
-          <button class="flex justify-end btn btn-primary mx-2">
+          <button v-if="!session" class="flex justify-end btn btn-primary mx-2">
             <NuxtLink href="/login">Login</NuxtLink>
           </button>
-          <button @click="handleSignout" class="flex justify-end btn btn-primary">
+          <button
+            v-if="session"
+            @click="handleSignout"
+            class="flex justify-end btn btn-primary mx-2"
+          >
             Logout
           </button>
         </div>

@@ -8,18 +8,22 @@ const prisma = new PrismaClient()
 
 async function seed() {
   try {
+    const password = process.env.USERS_SEED_PASSWORD
+    if (!password) {
+      throw new Error("USER_PASSWORD is not defined")
+    }
     // Create users
     const user1 = await prisma.user.create({
       data: {
         email: "user1@example.com",
-        password: await bcrypt.hash(process.env.USER_PASSWORD, 10),
+        password: await bcrypt.hash(password, 10),
       },
     })
 
     const user2 = await prisma.user.create({
       data: {
         email: "user2@example.com",
-        password: await bcrypt.hash(process.env.USER_PASSWORD, 10),
+        password: await bcrypt.hash(password, 10),
       },
     })
 

@@ -6,7 +6,7 @@ const { data } = await useFetch("/api/v1/hello")
 <template>
   <div>
     <h1 class="PageTitle">My Contacts</h1>
-    <div class="px-4 sm:w mx-auto">
+    <div class="px-4 sm:w-1/2 mx-auto">
       <p class="text-xl font-bold py-4">Hello {{ session?.user?.firstName }} ! 🥳</p>
     </div>
     <div class="px-4 sm:w-1/2 mx-auto">

@@ -36,6 +36,8 @@ model Contact {
   facebook String?
   instagram String?
   twitter String?
+  jobTitle String?
+  company String?
   notes    String?
 
   user     User     @relation(fields: [userId], references: [id])

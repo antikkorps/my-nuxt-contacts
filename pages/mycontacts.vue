@@ -27,6 +27,7 @@ const { data } = await useFetch("/api/v1/hello")
       <div class="sm:w-1/2">
         <ContactCard />
       </div>
+      <NuxtPage />
     </div>
   </div>
 </template>

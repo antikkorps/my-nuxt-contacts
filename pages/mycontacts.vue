@@ -22,12 +22,16 @@ const { data } = await useFetch("/api/v1/hello")
       {{ contact.name }}
     </li>
   </ul> -->
+      <button class="btn btn-primary">
+        <NuxtLink to="/mycontacts/add">Ajouter un contact</NuxtLink>
+      </button>
+      <NuxtPage />
+
       <SearchContact class="flex justify-center mx-auto sm:w-1/2 my-4" />
 
       <div class="sm:w-1/2">
         <ContactCard />
       </div>
-      <NuxtPage />
     </div>
   </div>
 </template>

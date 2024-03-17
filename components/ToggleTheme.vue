@@ -1,27 +1,27 @@
 <script setup lang="ts">
-let isDark = ref(true)
+let colorMode = ref(true)
 
 if (process.client) {
-  isDark = ref(localStorage.getItem("darkMode") === "true")
+  colorMode = ref(localStorage.getItem("darkMode") === "true")
 }
 
 watchEffect(() => {
   if (typeof document !== "undefined") {
-    if (isDark.value) {
+    if (colorMode.value) {
       document.documentElement.setAttribute("data-theme", "luxury")
-      localStorage.setItem("darkMode", isDark.value.toString())
+      localStorage.setItem("darkMode", colorMode.value.toString())
     } else {
       document.documentElement.setAttribute("data-theme", "light")
-      localStorage.setItem("darkMode", isDark.value.toString())
+      localStorage.setItem("darkMode", colorMode.value.toString())
     }
-  }
-})
 
-onMounted(() => {
-  if (localStorage.getItem("darkMode") == "true") {
-    isDark.value = true
-  } else {
-    isDark.value = false
+    onMounted(() => {
+      if (localStorage.getItem("darkMode") == "true") {
+        colorMode.value = true
+      } else {
+        colorMode.value = false
+      }
+    })
   }
 })
 </script>
@@ -29,7 +29,7 @@ onMounted(() => {
   <div>
     <label class="cursor-pointer grid place-items-center">
       <input
-        v-model="isDark"
+        v-model="colorMode"
         type="checkbox"
         value="synthwave"
         class="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"

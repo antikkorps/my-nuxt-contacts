@@ -1,16 +1,28 @@
 <script setup lang="ts">
-const isDark = ref(false)
+let isDark = ref(true)
+
+if (process.client) {
+  isDark = ref(localStorage.getItem("darkMode") === "true")
+}
+
+watchEffect(() => {
+  if (typeof document !== "undefined") {
+    if (isDark.value) {
+      document.documentElement.setAttribute("data-theme", "luxury")
+      localStorage.setItem("darkMode", isDark.value.toString())
+    } else {
+      document.documentElement.setAttribute("data-theme", "light")
+      localStorage.setItem("darkMode", isDark.value.toString())
+    }
+  }
+})
 
 onMounted(() => {
-  watchEffect(() => {
-    if (typeof document !== "undefined") {
-      if (isDark.value) {
-        document.documentElement.setAttribute("data-theme", "luxury")
-      } else {
-        document.documentElement.setAttribute("data-theme", "light")
-      }
-    }
-  })
+  if (localStorage.getItem("darkMode") == "true") {
+    isDark.value = true
+  } else {
+    isDark.value = false
+  }
 })
 </script>
 <template>

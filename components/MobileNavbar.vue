@@ -48,7 +48,7 @@ const handleIsActive = (clickedButton: Button) => {
         @click="handleIsActive(mobileNavLink)"
         :class="{ active: mobileNavLink.isActive }"
         class="text-accent"
-        :href="mobileNavLink.href"
+        :to="mobileNavLink.href"
       >
         <Avatar
           v-if="session && mobileNavLink.id === 'myProfile'"

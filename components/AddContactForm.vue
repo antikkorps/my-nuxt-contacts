@@ -2,7 +2,7 @@
   <div>
     <h1 class="PageTitle">Add a contact</h1>
     <div class="flex justify-center w-full">
-      <form action="" class="w-full">
+      <form action="" class="flex flex-col w-full">
         <div class="flex flex-col sm:flex-row justify-around mx-auto">
           <label class="form-control w-full max-w-xs mx-1">
             <div class="label">
@@ -26,7 +26,7 @@
             />
           </label>
         </div>
-        <div class="flex flex-col sm:flex-row justify-center mx-auto">
+        <div class="flex flex-col justify-center w-full mx-auto">
           <label class="form-control w-full max-w-xs mx-1">
             <div class="label">
               <span class="label-text">Email</span>
@@ -70,7 +70,19 @@
           </label>
         </div>
 
-        <div class="w-full flex-row justify-end my-3">
+        <div class="flex flex-col justify-center mx-auto w-full">
+          <label class="form-control">
+            <div class="label">
+              <span class="label-text">Ajouter une note</span>
+            </div>
+            <textarea
+              class="textarea textarea-bordered h-24"
+              placeholder="Note"
+            ></textarea>
+          </label>
+        </div>
+
+        <div class="flex items-start flex-wrap justify-end my-6">
           <button class="btn btn-primary mx-1">Sauvegarder</button>
           <button class="btn btn-outline btn-error mx-1">
             <NuxtLink to="/mycontacts">Annuler</NuxtLink>

@@ -7,10 +7,15 @@ const { session, user } = useAuth()
   <div class="pt-4">
     <div class="card w-full sm:w-1/2 flex justify-center mx-auto bg-base-100 shadow-xl">
       <div class="card-body">
-        <h2 class="card-title justify-center">
+        <NuxtImg
+          :src="session?.user?.avatar"
+          class="w-52 h-52 rounded-full justify-center mx-auto"
+        />
+
+        <h2 class="card-title justify-center mt-2">
           {{ user?.firstName }} {{ user?.lastName }}
         </h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <p class="text-center">If a dog chews shoes whose shoes does he choose?</p>
         <div class="grid grid-cols-3 text-center mt-20 md:mt-0">
           <div>
             <p class="font-bold text-xl">22</p>
@@ -25,7 +30,7 @@ const { session, user } = useAuth()
             <p class="text-gray-400">Commentaires</p>
           </div>
         </div>
-        <div class="card-actions justify-end">
+        <div class="card-actions justify-end my-10">
           <button class="btn btn-primary">Modifier mon profil</button>
           <button class="btn btn-warning">
             <NuxtLink to="/addcontact">Ajouter un contact</NuxtLink>

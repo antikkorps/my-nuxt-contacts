@@ -5,11 +5,13 @@ const { session, user } = useAuth()
 </script>
 <template>
   <div class="pt-4">
-    <div class="card w-full sm:w-1/2 flex justify-center mx-auto bg-base-100 shadow-xl">
+    <div
+      class="card w-full sm:w-1/2 flex justify-center mx-auto bg-base-100 shadow-xl relative top-20"
+    >
       <div class="card-body">
         <NuxtImg
           :src="session?.user?.avatar"
-          class="w-52 h-52 rounded-full justify-center mx-auto"
+          class="w-52 h-52 rounded-full justify-center mx-auto relative -top-20"
         />
 
         <h2 class="card-title justify-center mt-2">
@@ -27,10 +29,10 @@ const { session, user } = useAuth()
           </div>
           <div>
             <p class="font-bold text-xl">89</p>
-            <p class="text-gray-400">Commentaires</p>
+            <p class="text-gray-400">Notes</p>
           </div>
         </div>
-        <div class="card-actions justify-end my-10">
+        <div class="card-actions justify-center sm:justify-end my-10">
           <button class="btn btn-primary">Modifier mon profil</button>
           <button class="btn btn-warning">
             <NuxtLink to="/addcontact">Ajouter un contact</NuxtLink>

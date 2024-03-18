@@ -38,7 +38,7 @@
             />
           </label>
 
-          <div class="form-control w-full sm:w-1/2">
+          <div class="form-control flex justify-center sm:justify-around w-full sm:w-1/2">
             <label class="cursor-pointer label">
               <span class="label-text">Ajouter aux favoris</span>
               <input type="checkbox" class="toggle toggle-primary" />
@@ -82,7 +82,7 @@
           </label>
         </div>
 
-        <div class="flex items-start flex-wrap justify-end my-6">
+        <div class="flex items-start flex-wrap justify-center sm:justify-end my-6">
           <button class="btn btn-primary mx-1">Sauvegarder</button>
           <button class="btn btn-outline btn-error mx-1">
             <NuxtLink to="/mycontacts">Annuler</NuxtLink>

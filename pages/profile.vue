@@ -14,10 +14,10 @@ const { session, user } = useAuth()
           class="w-52 h-52 rounded-full justify-center mx-auto relative -top-20"
         />
 
-        <h2 class="card-title justify-center mt-2">
+        <h2 class="card-title justify-center -mt-10">
           {{ user?.firstName }} {{ user?.lastName }}
         </h2>
-        <p class="text-center">If a dog chews shoes whose shoes does he choose?</p>
+        <p class="text-center mb-4">If a dog chews shoes whose shoes does he choose?</p>
         <div class="grid grid-cols-3 text-center mt-20 md:mt-0">
           <div>
             <p class="font-bold text-xl">22</p>

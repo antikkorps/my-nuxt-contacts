@@ -47,6 +47,7 @@ const handleIsActive = (clickedButton: Button) => {
         :key="mobileNavLink.id"
         @click="handleIsActive(mobileNavLink)"
         :class="{ active: mobileNavLink.isActive }"
+        class="text-primary"
         activeClass="text-accent"
         :to="mobileNavLink.href"
       >

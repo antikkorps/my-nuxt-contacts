@@ -28,7 +28,7 @@ const { session, user } = useAuth()
         <div class="card-actions justify-end">
           <button class="btn btn-primary">Modifier mon profil</button>
           <button class="btn btn-warning">
-            <NuxtLink to="/mycontacts/add">Ajouter un contact</NuxtLink>
+            <NuxtLink to="/addcontact">Ajouter un contact</NuxtLink>
           </button>
         </div>
       </div>

@@ -4,6 +4,6 @@ const prisma = new PrismaClient()
 
 export default defineEventHandler((event) => {
   return {
-    hello: "world",
+    hello: "users contacts",
   }
 })

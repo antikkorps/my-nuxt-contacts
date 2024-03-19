@@ -2,6 +2,13 @@
 definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } })
 
 const { session, user } = useAuth()
+const favoriteCount = ref(0)
+
+onMounted(async () => {
+  const response = await fetch("/api/v1/contacts/favorites-count")
+  const data = await response.json()
+  favoriteCount.value = data.body.count
+})
 </script>
 <template>
   <div class="pt-4">
@@ -28,7 +35,7 @@ const { session, user } = useAuth()
             <p class="text-gray-400">Contacts</p>
           </div>
           <div>
-            <p class="font-bold text-xl">10</p>
+            <p class="font-bold text-xl">{{ favoriteCount }}</p>
             <p class="text-gray-400">Favoris</p>
           </div>
           <div>

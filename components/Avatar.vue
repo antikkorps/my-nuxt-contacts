@@ -5,12 +5,18 @@ const lastNameInitialOfUser = session.value?.user?.lastName?.charAt(0)
 const userInitials = `${firstNameInitialOfUser}${lastNameInitialOfUser}`
 
 let imageLoaded = false
+const key = ref(0)
+
 const handleLoad = () => {
   imageLoaded = true
 }
+
+const updateAvatarOnclick = () => {
+  key.value++
+}
 </script>
 <template>
-  <NuxtLink href="/profile">
+  <NuxtLink :key="key" href="/profile" @click="updateAvatarOnclick">
     <div class="avatar">
       <div
         class="w-10 mx-2 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"

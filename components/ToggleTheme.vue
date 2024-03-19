@@ -8,7 +8,7 @@ if (process.client) {
 watchEffect(() => {
   if (typeof document !== "undefined") {
     if (colorMode.value) {
-      document.documentElement.setAttribute("data-theme", "dracula")
+      document.documentElement.setAttribute("data-theme", "dark")
       localStorage.setItem("darkMode", colorMode.value.toString())
     } else {
       document.documentElement.setAttribute("data-theme", "light")

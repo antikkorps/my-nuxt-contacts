@@ -17,7 +17,11 @@ const { session, user } = useAuth()
         <h2 class="card-title justify-center -mt-10">
           {{ user?.firstName }} {{ user?.lastName }}
         </h2>
-        <p class="text-center mb-4">If a dog chews shoes whose shoes does he choose?</p>
+        <p class="text-center mb-4">Bienvenue sur le site myContact</p>
+        <p class="text-center mb-4">
+          Votre Status est :
+          {{ user && user.role === "user" ? "Utilisateur" : "Admininistrateur" }}
+        </p>
         <div class="grid grid-cols-3 text-center mt-20 md:mt-0">
           <div>
             <p class="font-bold text-xl">22</p>

@@ -18,7 +18,11 @@ export default defineEventHandler(async (event) => {
   const userId = session.user?.id;
 
   try {
-    const contacts = await prisma.contact.findMany({});
+    const contacts = await prisma.contact.findMany({
+      where: {
+        userId: userId,
+      },
+    });
 
     return {
       status: 200,

@@ -1,20 +1,20 @@
 <script setup lang="ts">
-const isFavorite = ref(false);
-const isPinging = ref(false);
-
-const toggleFavorite = () => {
-  isFavorite.value = !isFavorite.value;
-  if (isFavorite.value) {
-    isPinging.value = true;
-    setTimeout(() => {
-      isPinging.value = false;
-    }, 650);
-  }
-};
-
 const props = defineProps({
   contact: Object,
 });
+
+const contact = ref(props.contact);
+const emit = defineEmits(["toggle-favorite"]);
+
+const toggleFavorite = () => {
+  if (contact.value) {
+    contact.value.isFavorite = !contact.value?.isFavorite;
+    emit("toggle-favorite", {
+      id: props.contact?.id,
+      isFavorite: contact.value?.isFavorite,
+    });
+  }
+};
 </script>
 
 <template>
@@ -40,7 +40,10 @@ const props = defineProps({
         <h2 class="card-title">
           {{ contact?.firstName }} {{ contact?.lastName }}
         </h2>
-        <StarredToFavorite />
+        <StarredToFavorite
+          :isFavorite="contact?.isFavorite"
+          @toggle-favorite="toggleFavorite"
+        />
       </div>
       <div>
         <p>email : {{ contact?.email }}</p>

@@ -1,16 +1,24 @@
 <script setup lang="ts">
-const isFavorite = ref(false)
-const isPinging = ref(false)
+const isFavorite = ref(false);
+const isPinging = ref(false);
+
+const props = defineProps({ isFavorite: Boolean });
+
+watchEffect(() => {
+  isFavorite.value = props.isFavorite;
+});
+
+const emit = defineEmits(["toggle-favorite"]);
 
 const toggleFavorite = () => {
-  isFavorite.value = !isFavorite.value
-  if (isFavorite.value) {
-    isPinging.value = true
+  if (props.isFavorite) {
+    isPinging.value = true;
     setTimeout(() => {
-      isPinging.value = false
-    }, 650)
+      isPinging.value = false;
+    }, 650);
+    emit("toggle-favorite");
   }
-}
+};
 </script>
 <template>
   <svg

@@ -11,14 +11,13 @@ onMounted(async () => {
   const response = await fetch("/api/v1/contacts/user-contacts");
   const data = await response.json();
   contacts.value = data.body.contacts;
-  console.log(contacts.value);
 });
 </script>
 <template>
   <div>
     <h1 class="PageTitle">My Contacts</h1>
     <div class="px-4 sm:w-1/2 mx-auto">
-      <p class="text-xl font-bold py-4">
+      <p class="text-3xl font-bold py-4">
         Hello {{ session?.user?.firstName }} ! 🥳
       </p>
     </div>
@@ -40,7 +39,7 @@ onMounted(async () => {
           v-for="contact in contacts"
           :key="contact.id"
           :contact="contact"
-          class="my-4"
+          class="my-10"
         />
       </div>
     </div>

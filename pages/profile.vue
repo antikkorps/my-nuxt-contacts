@@ -1,14 +1,24 @@
 <script setup lang="ts">
-definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } })
+definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
 
-const { session, user } = useAuth()
-const favoriteCount = ref(0)
+const { session, user } = useAuth();
+const favoriteCount = ref(0);
+const contactsCount = ref(0);
+const notesCount = ref(0);
 
 onMounted(async () => {
-  const response = await fetch("/api/v1/contacts/favorites-count")
-  const data = await response.json()
-  favoriteCount.value = data.body.count
-})
+  const response1 = await fetch("/api/v1/contacts/favorites-count");
+  const data1 = await response1.json();
+  favoriteCount.value = data1.body.count;
+
+  const response2 = await fetch("/api/v1/contacts/contacts-count");
+  const data2 = await response2.json();
+  contactsCount.value = data2.body.count;
+
+  const response3 = await fetch("/api/v1/contacts/notes-count");
+  const data3 = await response3.json();
+  notesCount.value = data3.body.count;
+});
 </script>
 <template>
   <div class="pt-4">
@@ -27,20 +37,22 @@ onMounted(async () => {
         <p class="text-center mb-4">Bienvenue sur le site myContact</p>
         <p class="text-center mb-4">
           Votre Status est :
-          {{ user && user.role === "user" ? "Utilisateur" : "Admininistrateur" }}
+          {{
+            user && user.role === "user" ? "Utilisateur" : "Admininistrateur"
+          }}
         </p>
         <div class="grid grid-cols-3 text-center mt-20 md:mt-0">
           <div>
-            <p class="font-bold text-xl">22</p>
-            <p class="text-gray-400">Contacts</p>
+            <p class="font-bold text-xl">{{ contactsCount }}</p>
+            <p class="statsTitle">Contacts</p>
           </div>
           <div>
             <p class="font-bold text-xl">{{ favoriteCount }}</p>
-            <p class="text-gray-400">Favoris</p>
+            <p class="statsTitle">Favoris</p>
           </div>
           <div>
-            <p class="font-bold text-xl">89</p>
-            <p class="text-gray-400">Notes</p>
+            <p class="font-bold text-xl">{{ notesCount }}</p>
+            <p class="statsTitle">Notes</p>
           </div>
         </div>
         <div class="card-actions justify-center sm:justify-end my-10">

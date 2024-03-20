@@ -6,4 +6,7 @@
   .PageTitle {
     @apply text-3xl font-bold text-center my-4;
   }
+  .statsTitle {
+    @apply text-2xl font-bold text-center text-gray-500;
+  }
 }

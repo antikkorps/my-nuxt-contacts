@@ -1,29 +1,29 @@
 <script setup lang="ts">
-let colorMode = ref(true)
+let colorMode = ref(true);
 
 if (process.client) {
-  colorMode = ref(localStorage.getItem("darkMode") === "true")
+  colorMode = ref(localStorage.getItem("darkMode") === "true");
 }
 
 watchEffect(() => {
   if (typeof document !== "undefined") {
     if (colorMode.value) {
-      document.documentElement.setAttribute("data-theme", "dark")
-      localStorage.setItem("darkMode", colorMode.value.toString())
+      document.documentElement.setAttribute("data-theme", "luxury");
+      localStorage.setItem("darkMode", colorMode.value.toString());
     } else {
-      document.documentElement.setAttribute("data-theme", "light")
-      localStorage.setItem("darkMode", colorMode.value.toString())
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("darkMode", colorMode.value.toString());
     }
 
     onMounted(() => {
       if (localStorage.getItem("darkMode") == "true") {
-        colorMode.value = true
+        colorMode.value = true;
       } else {
-        colorMode.value = false
+        colorMode.value = false;
       }
-    })
+    });
   }
-})
+});
 </script>
 <template>
   <div>

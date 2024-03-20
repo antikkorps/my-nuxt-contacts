@@ -41,6 +41,7 @@ const toggleFavorite = () => {
           {{ contact?.firstName }} {{ contact?.lastName }}
         </h2>
         <StarredToFavorite
+          :id="contact?.id"
           :isFavorite="contact?.isFavorite"
           @toggle-favorite="toggleFavorite"
         />

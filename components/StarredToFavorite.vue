@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const isFavorite = ref(false);
+let isFavorite = ref(false);
 const isPinging = ref(false);
 
-const props = defineProps({ isFavorite: Boolean });
+const props = defineProps({ isFavorite: Boolean, id: String });
 
 watchEffect(() => {
   isFavorite.value = props.isFavorite;
@@ -10,13 +10,31 @@ watchEffect(() => {
 
 const emit = defineEmits(["toggle-favorite"]);
 
-const toggleFavorite = () => {
+const handleToggleFavorite = async () => {
   if (props.isFavorite) {
     isPinging.value = true;
     setTimeout(() => {
       isPinging.value = false;
     }, 650);
     emit("toggle-favorite");
+
+    const data = {
+      id: props.id,
+      isFavorite: !isFavorite.value,
+    };
+    console.log("is Favorite ?", isFavorite);
+    console.log("data send", data);
+
+    const response = await fetch("/api/v1/contacts/handle-contact-status", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json();
+    console.log("console log de responseData:", responseData);
+    isFavorite.value = responseData?.isFavorite;
   }
 };
 </script>
@@ -28,13 +46,13 @@ const toggleFavorite = () => {
     stroke-width="1.5"
     stroke="currentColor"
     id="star"
-    class="w-6 h-6 cursor pointer"
+    class="w-6 h-6 cursor-pointer"
     :class="{
       'animate-ping': isPinging,
       'text-yellow-500': isFavorite,
       'fill-current': isFavorite,
     }"
-    @click="toggleFavorite"
+    @click="handleToggleFavorite"
   >
     <path
       stroke-linecap="round"

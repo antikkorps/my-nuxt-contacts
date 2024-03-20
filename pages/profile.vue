@@ -7,17 +7,11 @@ const contactsCount = ref(0);
 const notesCount = ref(0);
 
 onMounted(async () => {
-  const response1 = await fetch("/api/v1/contacts/favorites-count");
-  const data1 = await response1.json();
-  favoriteCount.value = data1.body.count;
-
-  const response2 = await fetch("/api/v1/contacts/contacts-count");
-  const data2 = await response2.json();
-  contactsCount.value = data2.body.count;
-
-  const response3 = await fetch("/api/v1/contacts/notes-count");
-  const data3 = await response3.json();
-  notesCount.value = data3.body.count;
+  const response = await fetch("/api/v1/contacts/get-counts");
+  const data = await response.json();
+  favoriteCount.value = data.body.favoritesCount;
+  contactsCount.value = data.body.contactsCount;
+  notesCount.value = data.body.notesCount;
 });
 </script>
 <template>

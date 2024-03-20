@@ -35,11 +35,12 @@ onMounted(async () => {
 
       <SearchContact class="flex justify-center mx-auto sm:w-1/2 my-4" />
 
-      <div class="flex sm:w-full">
+      <div class="sm:w-full">
         <ContactCard
           v-for="contact in contacts"
           :key="contact.id"
           :contact="contact"
+          class="my-4"
         />
       </div>
     </div>

@@ -1,33 +1,52 @@
 <script setup lang="ts">
-const isFavorite = ref(false)
-const isPinging = ref(false)
+const isFavorite = ref(false);
+const isPinging = ref(false);
 
 const toggleFavorite = () => {
-  isFavorite.value = !isFavorite.value
+  isFavorite.value = !isFavorite.value;
   if (isFavorite.value) {
-    isPinging.value = true
+    isPinging.value = true;
     setTimeout(() => {
-      isPinging.value = false
-    }, 650)
+      isPinging.value = false;
+    }, 650);
   }
-}
+};
+
+const props = defineProps({
+  contact: Object,
+});
 </script>
 
 <template>
-  <div class="card card-side bg-base-100 shadow-xl">
-    <figure>
+  <div
+    class="card card-side bg-base-100 shadow-xl flex-col md:flex-row rounded-none sm:rounded-l-lg"
+  >
+    <figure class="md:w-1/6">
       <img
-        src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
-        alt="Movie"
+        v-if="contact?.image"
+        :src="contact?.image"
+        alt="Image of contact"
+        class="w-full md:h-full object-cover overflow-hidden"
+      />
+      <img
+        v-else
+        src="https://placehold.co/150x200/png"
+        alt="image of contact missing"
+        class="w-full md:h-full object-cover overflow-hidden"
       />
     </figure>
     <div class="card-body">
       <div class="flex flex-row justify-between">
-        <h2 class="card-title">Peter Parker</h2>
+        <h2 class="card-title">
+          {{ contact?.firstName }} {{ contact?.lastName }}
+        </h2>
         <StarredToFavorite />
       </div>
+      <div>
+        <p>email : {{ contact?.email }}</p>
+        <p v-if="contact?.notes">Note sur le contact : {{ contact?.notes }}</p>
+      </div>
 
-      <p>One of my good friends</p>
       <div class="card-actions justify-end">
         <button class="btn btn-primary">Ouvrir</button>
         <button class="btn btn-primary">Supprimer</button>

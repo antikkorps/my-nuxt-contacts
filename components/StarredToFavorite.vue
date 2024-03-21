@@ -1,8 +1,9 @@
 <script setup lang="ts">
-let isFavorite = ref(false);
+
 const isPinging = ref(false);
 
 const props = defineProps({ isFavorite: Boolean, id: String });
+let isFavorite = ref(props.isFavorite);
 
 watchEffect(() => {
   isFavorite.value = props.isFavorite;
@@ -11,7 +12,6 @@ watchEffect(() => {
 const emit = defineEmits(["toggle-favorite"]);
 
 const handleToggleFavorite = async () => {
-  if (props.isFavorite) {
     isPinging.value = true;
     setTimeout(() => {
       isPinging.value = false;
@@ -22,8 +22,6 @@ const handleToggleFavorite = async () => {
       id: props.id,
       isFavorite: !isFavorite.value,
     };
-    console.log("is Favorite ?", isFavorite);
-    console.log("data send", data);
 
     const response = await fetch("/api/v1/contacts/handle-contact-status", {
       method: "POST",
@@ -33,9 +31,11 @@ const handleToggleFavorite = async () => {
       body: JSON.stringify(data),
     });
     const responseData = await response.json();
-    console.log("console log de responseData:", responseData);
-    isFavorite.value = responseData?.isFavorite;
-  }
+    isFavorite.value = responseData?.body.isFavorite;
+
+    console.log('la réponse' ,responseData?.body.isFavorite);
+
+  
 };
 </script>
 <template>

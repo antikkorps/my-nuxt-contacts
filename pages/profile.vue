@@ -22,7 +22,7 @@ onMounted(async () => {
       <div class="card-body">
         <NuxtImg
           :src="session?.user?.avatar"
-          class="w-52 h-52 rounded-full justify-center mx-auto relative -top-20"
+          class="w-52 h-52 rounded-full justify-center mx-auto relative -top-20 shadow-2xl"
         />
 
         <h2 class="card-title justify-center -mt-10">

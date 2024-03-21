@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const isPinging = ref(false);
 
 const props = defineProps({ isFavorite: Boolean, id: String });
@@ -12,30 +11,28 @@ watchEffect(() => {
 const emit = defineEmits(["toggle-favorite"]);
 
 const handleToggleFavorite = async () => {
-    isPinging.value = true;
-    setTimeout(() => {
-      isPinging.value = false;
-    }, 650);
-    emit("toggle-favorite");
+  isPinging.value = true;
+  setTimeout(() => {
+    isPinging.value = false;
+  }, 650);
+  emit("toggle-favorite");
 
-    const data = {
-      id: props.id,
-      isFavorite: !isFavorite.value,
-    };
+  const data = {
+    id: props.id,
+    isFavorite: !isFavorite.value,
+  };
 
-    const response = await fetch("/api/v1/contacts/handle-contact-status", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const responseData = await response.json();
-    isFavorite.value = responseData?.body.isFavorite;
+  const response = await fetch("/api/v1/contacts/handle-contact-status", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const responseData = await response.json();
+  isFavorite.value = responseData?.body.isFavorite;
 
-    console.log('la réponse' ,responseData?.body.isFavorite);
-
-  
+  console.log("la réponse", responseData?.body.isFavorite);
 };
 </script>
 <template>
@@ -46,7 +43,7 @@ const handleToggleFavorite = async () => {
     stroke-width="1.5"
     stroke="currentColor"
     id="star"
-    class="w-6 h-6 cursor-pointer"
+    class="h-6 w-6 cursor-pointer"
     :class="{
       'animate-ping': isPinging,
       'text-yellow-500': isFavorite,

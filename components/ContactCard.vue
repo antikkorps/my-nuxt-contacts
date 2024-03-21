@@ -19,20 +19,20 @@ const toggleFavorite = () => {
 
 <template>
   <div
-    class="card card-side bg-base-100 shadow-xl flex-col md:flex-row rounded-none sm:rounded-l-lg"
+    class="card card-side flex-col rounded-none bg-base-100 shadow-xl sm:rounded-l-lg md:flex-row"
   >
     <figure class="md:w-1/6">
       <img
         v-if="contact?.image"
         :src="contact?.image"
         alt="Image of contact"
-        class="w-full md:h-full object-cover overflow-hidden"
+        class="w-full overflow-hidden object-cover md:h-full"
       />
       <img
         v-else
         src="https://placehold.co/150x200/png"
         alt="image of contact missing"
-        class="w-full md:h-full object-cover overflow-hidden"
+        class="w-full overflow-hidden object-cover md:h-full"
       />
     </figure>
     <div class="card-body">

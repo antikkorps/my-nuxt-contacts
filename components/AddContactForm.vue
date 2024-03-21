@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1 class="PageTitle">Add a contact</h1>
-    <div class="flex justify-center w-full">
-      <form action="" class="flex flex-col w-full">
-        <div class="flex flex-col sm:flex-row justify-around mx-auto">
-          <label class="form-control w-full max-w-xs mx-1">
+    <div class="flex w-full justify-center">
+      <form action="" class="flex w-full flex-col">
+        <div class="mx-auto flex flex-col justify-around sm:flex-row">
+          <label class="form-control mx-1 w-full max-w-xs">
             <div class="label">
               <span class="label-text">Firstname</span>
             </div>
@@ -15,7 +15,7 @@
             />
           </label>
 
-          <label class="form-control w-full max-w-xs mx-1">
+          <label class="form-control mx-1 w-full max-w-xs">
             <div class="label">
               <span class="label-text">Lastname</span>
             </div>
@@ -26,8 +26,8 @@
             />
           </label>
         </div>
-        <div class="flex flex-col justify-center w-full mx-auto">
-          <label class="form-control w-full max-w-xs mx-1">
+        <div class="mx-auto flex w-full flex-col justify-center">
+          <label class="form-control mx-1 w-full max-w-xs">
             <div class="label">
               <span class="label-text">Email</span>
             </div>
@@ -38,16 +38,18 @@
             />
           </label>
 
-          <div class="form-control flex justify-center sm:justify-around w-full sm:w-1/2">
-            <label class="cursor-pointer label">
+          <div
+            class="form-control flex w-full justify-center sm:w-1/2 sm:justify-around"
+          >
+            <label class="label cursor-pointer">
               <span class="label-text">Ajouter aux favoris</span>
               <input type="checkbox" class="toggle toggle-primary" />
             </label>
           </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row justify-around mx-auto">
-          <label class="form-control w-full max-w-xs mx-1">
+        <div class="mx-auto flex flex-col justify-around sm:flex-row">
+          <label class="form-control mx-1 w-full max-w-xs">
             <div class="label">
               <span class="label-text">Fixe</span>
             </div>
@@ -58,7 +60,7 @@
             />
           </label>
 
-          <label class="form-control w-full max-w-xs mx-1">
+          <label class="form-control mx-1 w-full max-w-xs">
             <div class="label">
               <span class="label-text">Mobile</span>
             </div>
@@ -70,7 +72,7 @@
           </label>
         </div>
 
-        <div class="flex flex-col justify-center mx-auto w-full">
+        <div class="mx-auto flex w-full flex-col justify-center">
           <label class="form-control">
             <div class="label">
               <span class="label-text">Ajouter une note</span>
@@ -82,7 +84,9 @@
           </label>
         </div>
 
-        <div class="flex items-start flex-wrap justify-center sm:justify-end my-6">
+        <div
+          class="my-6 flex flex-wrap items-start justify-center sm:justify-end"
+        >
           <button class="btn btn-primary mx-1">Sauvegarder</button>
           <button class="btn btn-outline btn-error mx-1">
             <NuxtLink to="/mycontacts">Annuler</NuxtLink>

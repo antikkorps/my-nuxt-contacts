@@ -1,25 +1,25 @@
 <script setup lang="ts">
-const { session } = useAuth()
-const firstNameInitialOfUser = session.value?.user?.firstName?.charAt(0)
-const lastNameInitialOfUser = session.value?.user?.lastName?.charAt(0)
-const userInitials = `${firstNameInitialOfUser}${lastNameInitialOfUser}`
+const { session } = useAuth();
+const firstNameInitialOfUser = session.value?.user?.firstName?.charAt(0);
+const lastNameInitialOfUser = session.value?.user?.lastName?.charAt(0);
+const userInitials = `${firstNameInitialOfUser}${lastNameInitialOfUser}`;
 
-let imageLoaded = false
-const key = ref(0)
+let imageLoaded = false;
+const key = ref(0);
 
 const handleLoad = () => {
-  imageLoaded = true
-}
+  imageLoaded = true;
+};
 
 const updateAvatarOnclick = () => {
-  key.value++
-}
+  key.value++;
+};
 </script>
 <template>
   <NuxtLink :key="key" href="/profile" @click="updateAvatarOnclick">
     <div class="avatar">
       <div
-        class="w-10 mx-2 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+        class="mx-2 w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100"
       >
         <NuxtImg
           v-if="session?.user?.avatar"
@@ -28,7 +28,7 @@ const updateAvatarOnclick = () => {
         />
         <div
           v-else
-          class="flex items-center btn-primary justify-center h-full font-bold bg-primary rounded-full"
+          class="btn-primary flex h-full items-center justify-center rounded-full bg-primary font-bold"
         >
           {{ userInitials }}
         </div>

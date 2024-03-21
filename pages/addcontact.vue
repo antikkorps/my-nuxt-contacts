@@ -1,5 +1,5 @@
 <template>
-  <div class="sm:w-1/2 flex justify-center mx-auto">
+  <div class="mx-auto flex justify-center sm:w-1/2">
     <AddContactForm />
   </div>
 </template>

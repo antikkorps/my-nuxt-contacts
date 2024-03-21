@@ -27,15 +27,15 @@ watchEffect(() => {
 </script>
 <template>
   <div>
-    <label class="cursor-pointer grid place-items-center">
+    <label class="grid cursor-pointer place-items-center">
       <input
         v-model="colorMode"
         type="checkbox"
         value="synthwave"
-        class="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"
+        class="theme-controller toggle col-span-2 col-start-1 row-start-1 bg-base-content"
       />
       <svg
-        class="col-start-1 row-start-1 stroke-base-100 fill-base-100"
+        class="col-start-1 row-start-1 fill-base-100 stroke-base-100"
         xmlns="http://www.w3.org/2000/svg"
         width="14"
         height="14"
@@ -52,7 +52,7 @@ watchEffect(() => {
         />
       </svg>
       <svg
-        class="col-start-2 row-start-1 stroke-base-100 fill-base-100"
+        class="col-start-2 row-start-1 fill-base-100 stroke-base-100"
         xmlns="http://www.w3.org/2000/svg"
         width="14"
         height="14"

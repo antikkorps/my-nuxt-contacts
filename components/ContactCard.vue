@@ -47,8 +47,16 @@ const toggleFavorite = () => {
         />
       </div>
       <div>
-        <p>email : {{ contact?.email }}</p>
-        <p v-if="contact?.notes">Note sur le contact : {{ contact?.notes }}</p>
+        <p>
+          <span class="font-bold">email : </span>
+          <a :href="`mailto:${contact?.email}`" target="_blank">{{
+            contact?.email
+          }}</a>
+        </p>
+        <p v-if="contact?.notes">
+          <span class="font-bold">Note sur le contact : </span>
+          {{ contact?.notes }}
+        </p>
       </div>
 
       <div class="card-actions justify-end">

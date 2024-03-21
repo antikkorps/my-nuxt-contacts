@@ -11,6 +11,23 @@ onMounted(async () => {
   const response = await fetch("/api/v1/contacts/user-contacts");
   const data = await response.json();
   contacts.value = data.body.contacts;
+
+  const sortedContacts = contacts.value.slice().sort((a, b) => {
+    const nameA = `${a.firstName} ${a.lastName}`.toUpperCase();
+    const nameB = `${b.firstName} ${b.lastName}`.toUpperCase();
+
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names could be equal
+    return 0;
+  });
+
+  contacts.value = sortedContacts;
 });
 </script>
 <template>

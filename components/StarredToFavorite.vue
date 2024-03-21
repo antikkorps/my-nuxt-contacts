@@ -31,8 +31,6 @@ const handleToggleFavorite = async () => {
   });
   const responseData = await response.json();
   isFavorite.value = responseData?.body.isFavorite;
-
-  console.log("la réponse", responseData?.body.isFavorite);
 };
 </script>
 <template>

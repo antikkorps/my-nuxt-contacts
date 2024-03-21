@@ -47,12 +47,17 @@ const toggleFavorite = () => {
         />
       </div>
       <div>
-        <p>
-          <span class="font-bold">email : </span>
-          <a :href="`mailto:${contact?.email}`" target="_blank">{{
-            contact?.email
-          }}</a>
-        </p>
+        <div class="flex-start flex items-center">
+          <p>
+            <span class="font-bold">email : </span>
+            <a :href="`mailto:${contact?.email}`" target="_blank">{{
+              contact?.email
+            }}</a>
+          </p>
+          <div class="flex items-center">
+            <CopyToClipboard :text="contact?.email" />
+          </div>
+        </div>
         <p v-if="contact?.notes">
           <span class="font-bold">Note sur le contact : </span>
           {{ contact?.notes }}

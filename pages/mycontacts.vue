@@ -92,7 +92,7 @@ onMounted(async () => {
       </div>
     </div>
 
-    <div class="toast toast-end">
+    <div class="toast toast-center toast-middle">
       <div v-if="toast.show" :class="`alert alert-${toast.type}`">
         <span>{{ toast.message }}</span>
       </div>

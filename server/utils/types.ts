@@ -14,3 +14,8 @@ export interface Contact {
   notes: String;
   userId: string[];
 }
+
+export interface DeleteEvent {
+  success: boolean;
+  message: string;
+}

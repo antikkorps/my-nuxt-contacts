@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import type { DeleteEvent } from "~/server/utils/types";
+
 const props = defineProps({
   contact: Object,
 });
 
 const contact = ref(props.contact);
-const emit = defineEmits(["toggle-favorite"]);
+const emit = defineEmits(["toggle-favorite", "delete"]);
 
 const toggleFavorite = () => {
   if (contact.value) {
@@ -14,6 +16,10 @@ const toggleFavorite = () => {
       isFavorite: contact.value?.isFavorite,
     });
   }
+};
+
+const handleDelete = (event: DeleteEvent) => {
+  emit("delete", event);
 };
 </script>
 
@@ -66,7 +72,7 @@ const toggleFavorite = () => {
 
       <div class="card-actions justify-end">
         <button class="btn btn-primary">Ouvrir</button>
-        <button class="btn btn-primary">Supprimer</button>
+        <DeleteContactBtn @delete="handleDelete" :id="contact?.id" />
       </div>
     </div>
   </div>

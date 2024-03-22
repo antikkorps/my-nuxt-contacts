@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DeleteEvent } from "~/server/utils/types";
 definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
 
 import type { Contact } from "~/server/utils/types";
@@ -6,6 +7,35 @@ const { session, user } = useAuth();
 // const { data } = await useFetch("/api/v1/contacts/user-contacts");
 
 const contacts = ref<Contact[]>([]);
+const toast = ref({
+  show: false,
+  message: "",
+  type: "",
+});
+
+const handleDelete = ({ success, message }: DeleteEvent) => {
+  if (success) {
+    toast.value = {
+      show: true,
+      message: "le contact a bien été supprimé",
+      type: "success",
+    };
+  } else {
+    toast.value = {
+      show: true,
+      message: "Erreur lors de la suppression du contact",
+      type: "error",
+    };
+  }
+
+  setTimeout(() => {
+    toast.value = {
+      show: false,
+      message: "",
+      type: "",
+    };
+  }, 3000);
+};
 
 onMounted(async () => {
   const response = await fetch("/api/v1/contacts/user-contacts");
@@ -57,7 +87,14 @@ onMounted(async () => {
           :key="contact.id"
           :contact="contact"
           class="my-10"
+          @delete="handleDelete"
         />
+      </div>
+    </div>
+
+    <div class="toast toast-end">
+      <div v-if="toast.show" :class="`alert alert-${toast.type}`">
+        <span>{{ toast.message }}</span>
       </div>
     </div>
   </div>

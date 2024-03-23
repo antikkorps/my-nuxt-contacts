@@ -7,6 +7,7 @@ const { session, user } = useAuth();
 // const { data } = await useFetch("/api/v1/contacts/user-contacts");
 
 const contacts = ref<Contact[]>([]);
+
 const toast = ref({
   show: false,
   message: "",

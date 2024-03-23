@@ -11,12 +11,12 @@ export default defineEventHandler(async (event) => {
 
   return `hello ${contactId} !`;
 
-  // if (!session) {
-  //   return {
-  //     status: 401,
-  //     body: { error: "Unauthorized" },
-  //   };
-  // }
+  if (!session) {
+    return {
+      status: 401,
+      body: { error: "Unauthorized" },
+    };
+  }
 
   // const userId = session.user?.id;
 

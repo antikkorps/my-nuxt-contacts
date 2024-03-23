@@ -18,4 +18,5 @@ export interface Contact {
 export interface DeleteEvent {
   success: boolean;
   message: string;
+  id : string;
 }

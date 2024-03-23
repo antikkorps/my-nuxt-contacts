@@ -13,8 +13,9 @@ const toast = ref({
   type: "",
 });
 
-const handleDelete = ({ success, message }: DeleteEvent) => {
+const handleDelete = ({ success, message, id }: DeleteEvent) => {
   if (success) {
+    contacts.value = contacts.value.filter((contact) => contact.id !== id);
     toast.value = {
       show: true,
       message: "le contact a bien été supprimé",

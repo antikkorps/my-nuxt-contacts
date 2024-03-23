@@ -41,6 +41,19 @@ export default defineEventHandler(async (event) => {
       };
     }
 
+    if (event.method === "DELETE") {
+      await prisma.contact.delete({
+        where: {
+          id: contactId,
+        },
+      });
+
+      return {
+        status: 200,
+        body: { message: "Contact deleted successfully" },
+      };
+    }
+
     return {
       status: 200,
       body: {

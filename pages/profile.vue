@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { contactService } from "~/services";
+
 definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
 
 const { session, user } = useAuth();
@@ -7,8 +9,7 @@ const contactsCount = ref(0);
 const notesCount = ref(0);
 
 onMounted(async () => {
-  const response = await fetch("/api/v1/contacts/get-counts");
-  const data = await response.json();
+  const data = await contactService.getCounts();
   favoriteCount.value = data.body.favoritesCount;
   contactsCount.value = data.body.contactsCount;
   notesCount.value = data.body.notesCount;

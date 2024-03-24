@@ -42,7 +42,6 @@ const handleDelete = ({ success, message, id }: DeleteEvent) => {
 
 onMounted(async () => {
   const data = await contactService.getUserContacts();
-  console.log("this is the data", data);
   contacts.value = data.body.contacts;
 
   const sortedContacts = contacts.value.slice().sort((a, b) => {

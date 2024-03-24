@@ -17,3 +17,8 @@ export const getCounts = async () => {
   const data = await response.json();
   return data;
 };
+
+export const deleteContact = async (id: string) => {
+  const response = await fetch(`/api/v1/contacts/${id}`, { method: "DELETE" });
+  return response.ok;
+};

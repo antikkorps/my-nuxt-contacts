@@ -18,5 +18,12 @@ export interface Contact {
 export interface DeleteEvent {
   success: boolean;
   message: string;
-  id : string;
+  id: string;
+}
+
+export interface Button {
+  id: string;
+  isActive: boolean;
+  svgPath: string;
+  href: string;
 }

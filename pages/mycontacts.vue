@@ -77,7 +77,7 @@ onMounted(async () => {
       </div>
 
       <button class="btn btn-primary">
-        <NuxtLink to="/mycontacts/add">Ajouter un contact</NuxtLink>
+        <NuxtLink to="/add-contact">Ajouter un contact</NuxtLink>
       </button>
       <NuxtPage />
 

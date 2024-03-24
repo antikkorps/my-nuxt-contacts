@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DeleteEvent } from "~/server/utils/types";
+import { contactService } from "~/services";
 definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
 
 import type { Contact } from "~/server/utils/types";
@@ -40,8 +41,8 @@ const handleDelete = ({ success, message, id }: DeleteEvent) => {
 };
 
 onMounted(async () => {
-  const response = await fetch("/api/v1/contacts/user-contacts");
-  const data = await response.json();
+  const data = await contactService.getUserContacts();
+  console.log("this is the data", data);
   contacts.value = data.body.contacts;
 
   const sortedContacts = contacts.value.slice().sort((a, b) => {

@@ -8,12 +8,6 @@ const props = defineProps({
 const emit = defineEmits(["delete"]);
 
 const handleDeleteContact = async () => {
-  // const response = await fetch(
-  //   `http://localhost:3000/api/v1/contacts/${props.id}`,
-  //   {
-  //     method: "DELETE",
-  //   },
-  // );
   if (!props.id) {
     console.error("ID du contact non défini");
     return;

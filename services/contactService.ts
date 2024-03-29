@@ -1,3 +1,14 @@
+export const addContact = async (contact: any) => {
+  const response = await fetch("/api/v1/contacts/user-contacts-add", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(contact),
+  });
+  return response.ok;
+};
+
 export const getUserContacts = async () => {
   const response = await fetch("/api/v1/contacts/user-contacts");
   if (!response.ok) {

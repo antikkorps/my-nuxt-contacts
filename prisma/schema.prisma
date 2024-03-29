@@ -34,6 +34,7 @@ model Contact {
   email    String
   isFavorite Boolean @default(false)
   phone    String?
+  mobile   String?
   linkedin String?
   facebook String?
   instagram String?

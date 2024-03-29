@@ -27,6 +27,26 @@ const newContact = ref<Partial<Contact>>({
   isFavorite: false,
 });
 
+const onFileChange = async (event: Event) => {
+  const inputElement = event.target as HTMLInputElement;
+  let file: File | null = null;
+
+  if (inputElement && inputElement.files && inputElement.files.length > 0) {
+    file = inputElement.files[0];
+  }
+
+  if (file) {
+    try {
+      const imageUrl = await contactService.uploadImageInFilestack(file);
+      if (imageUrl && newContact.value) {
+        newContact.value.image = imageUrl;
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  }
+};
+
 const handleSubmit = async () => {
   try {
     await contactService.addContact(newContact.value);
@@ -67,7 +87,7 @@ const handleSubmit = async () => {
             />
           </label>
         </div>
-        <div class="mx-auto flex w-full flex-col justify-center">
+        <div class="mx-auto flex w-full justify-center">
           <label class="form-control mx-1 w-full max-w-xs">
             <div class="label">
               <span class="label-text">Email</span>
@@ -80,18 +100,29 @@ const handleSubmit = async () => {
             />
           </label>
 
-          <div
-            class="form-control flex w-full justify-center sm:w-1/2 sm:justify-around"
-          >
-            <label class="label cursor-pointer">
-              <span class="label-text">Ajouter aux favoris</span>
-              <input
-                v-model="newContact.isFavorite"
-                type="checkbox"
-                class="toggle toggle-primary"
-              />
-            </label>
-          </div>
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Image de contact</span>
+            </div>
+            <input
+              @change="onFileChange"
+              type="file"
+              class="file-input file-input-bordered w-full max-w-xs"
+            />
+          </label>
+        </div>
+
+        <div
+          class="form-control mt-3 flex w-full justify-center sm:w-1/2 sm:justify-around"
+        >
+          <label class="label cursor-pointer">
+            <span class="label-text">Ajouter aux favoris</span>
+            <input
+              v-model="newContact.isFavorite"
+              type="checkbox"
+              class="toggle toggle-primary"
+            />
+          </label>
         </div>
 
         <div class="flex flex-col justify-around sm:flex-row">
@@ -352,9 +383,9 @@ const handleSubmit = async () => {
           class="my-6 flex flex-wrap items-start justify-center sm:justify-end"
         >
           <button class="btn btn-primary mx-1">Sauvegarder</button>
-          <button class="btn btn-outline btn-error mx-1">
+          <div class="btn btn-outline btn-error mx-1">
             <NuxtLink to="/mycontacts">Annuler</NuxtLink>
-          </button>
+          </div>
         </div>
       </form>
     </div>

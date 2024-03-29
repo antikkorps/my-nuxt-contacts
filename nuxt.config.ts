@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { resolve } from "node:path"
+import { resolve } from "node:path";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -22,6 +22,9 @@ export default defineNuxtConfig({
         verifyClientOnEveryRequest: true, // whether to hit the /auth/session endpoint on every client request
         authenticatedRedirectTo: "/",
       },
+      fileStack: {
+        apiKey: process.env.NUXT_FILESTACK_API_KEY,
+      },
     },
   },
-})
+});

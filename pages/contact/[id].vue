@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { contactService } from "~/services/";
+import type { Contact } from "~/server/utils/types";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const contact = ref(null);
+const contact = ref<Contact | null>(null);
 
 onMounted(async () => {
   let id = route.params.id;

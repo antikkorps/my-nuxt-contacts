@@ -2,6 +2,23 @@
 import { contactService } from "~/services/index";
 import type { Contact } from "~/server/utils/types";
 
+const newContact = ref<Partial<Contact>>({
+  firstName: "",
+  lastName: "",
+  image: "",
+  email: "",
+  phone: "",
+  mobile: "",
+  linkedin: "",
+  facebook: "",
+  instagram: "",
+  twitter: "",
+  jobTitle: "",
+  company: "",
+  notes: "",
+  isFavorite: false,
+});
+
 const handleSubmit = async () => {
   console.log("submit");
 };
@@ -17,7 +34,7 @@ const handleSubmit = async () => {
               <span class="label-text">Firstname</span>
             </div>
             <input
-              v-model="firstName"
+              v-model="newContact.firstName"
               type="text"
               placeholder="eg. John"
               class="input input-bordered w-full max-w-xs"
@@ -29,6 +46,7 @@ const handleSubmit = async () => {
               <span class="label-text">Lastname</span>
             </div>
             <input
+              v-model="newContact.lastName"
               type="text"
               placeholder="eg. Doe"
               class="input input-bordered w-full max-w-xs"
@@ -41,6 +59,7 @@ const handleSubmit = async () => {
               <span class="label-text">Email</span>
             </div>
             <input
+              v-model="newContact.email"
               type="email"
               placeholder="eg. me@example.com"
               class="input input-bordered w-full max-w-xs"
@@ -52,7 +71,11 @@ const handleSubmit = async () => {
           >
             <label class="label cursor-pointer">
               <span class="label-text">Ajouter aux favoris</span>
-              <input type="checkbox" class="toggle toggle-primary" />
+              <input
+                v-model="newContact.isFavorite"
+                type="checkbox"
+                class="toggle toggle-primary"
+              />
             </label>
           </div>
         </div>
@@ -63,6 +86,7 @@ const handleSubmit = async () => {
               <span class="label-text">Téléphone Fixe</span>
             </div>
             <input
+              v-model="newContact.phone"
               type="phone"
               placeholder="00 00 00 00 00"
               class="input input-bordered w-full max-w-xs"
@@ -74,10 +98,88 @@ const handleSubmit = async () => {
               <span class="label-text">Téléphone Mobile</span>
             </div>
             <input
+              v-model="newContact.mobile"
               type="phone"
               placeholder="00 00 00 00 00"
               class="input input-bordered w-full max-w-xs"
             />
+          </label>
+        </div>
+        <div>
+          <label class="input input-bordered flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+              />
+            </svg>
+
+            <input type="text" class="grow" placeholder="LinkedIn" />
+          </label>
+
+          <label class="input input-bordered flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+              />
+            </svg>
+
+            <input type="text" class="grow" placeholder="Facebook" />
+          </label>
+
+          <label class="input input-bordered flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+              />
+            </svg>
+
+            <input type="text" class="grow" placeholder="Instagram" />
+          </label>
+
+          <label class="input input-bordered flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+              />
+            </svg>
+
+            <input type="text" class="grow" placeholder="Twitter / X" />
           </label>
         </div>
 
@@ -87,6 +189,7 @@ const handleSubmit = async () => {
               <span class="label-text">Ajouter une note</span>
             </div>
             <textarea
+              v-model="newContact.notes as string"
               class="textarea textarea-bordered h-24"
               placeholder="A very important note about this contact..."
             ></textarea>

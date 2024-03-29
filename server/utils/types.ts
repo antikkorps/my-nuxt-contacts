@@ -5,6 +5,7 @@ export interface Contact {
   lastName: string;
   email: string;
   phone: string;
+  mobile: string;
   linkedin: String;
   facebook: String;
   instagram: String;
@@ -13,6 +14,7 @@ export interface Contact {
   company: String;
   notes: String;
   userId: string[];
+  isFavorite: boolean;
 }
 
 export interface DeleteEvent {

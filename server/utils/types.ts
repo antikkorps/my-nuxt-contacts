@@ -10,6 +10,7 @@ export interface Contact {
   facebook: String;
   instagram: String;
   twitter: String;
+  github: String;
   jobTitle: String;
   company: String;
   notes: String;

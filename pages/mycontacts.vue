@@ -79,7 +79,6 @@ onMounted(async () => {
       <button class="btn btn-primary">
         <NuxtLink to="/add-contact">Ajouter un contact</NuxtLink>
       </button>
-      <NuxtPage />
 
       <SearchContact class="mx-auto my-4 flex justify-center sm:w-1/2" />
 

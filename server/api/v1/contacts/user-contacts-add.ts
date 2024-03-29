@@ -25,6 +25,10 @@ export default defineEventHandler(async (event) => {
         ...contactData,
       },
     });
+    return {
+      status: 200,
+      body: newContact,
+    };
   } catch (error) {
     return {
       status: 500,

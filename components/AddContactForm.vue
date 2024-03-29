@@ -7,6 +7,7 @@ const selectedSocialFields = ref({
   facebook: false,
   instagram: false,
   twitter: false,
+  github: false,
 });
 
 const newContact = ref<Partial<Contact>>({
@@ -143,28 +144,51 @@ const handleSubmit = async () => {
           <h3>Ajouter réseaux sociaux</h3>
           <label class="label cursor-pointer">
             <span class="label-text">LinkedIn</span>
-            <input type="checkbox" class="toggle" />
+            <input
+              type="checkbox"
+              class="toggle"
+              v-model="selectedSocialFields.linkedin"
+            />
           </label>
           <label class="label cursor-pointer">
             <span class="label-text">Facebook</span>
-            <input type="checkbox" class="toggle" />
+            <input
+              type="checkbox"
+              class="toggle"
+              v-model="selectedSocialFields.facebook"
+            />
           </label>
           <label class="label cursor-pointer">
             <span class="label-text">Instagram</span>
-            <input type="checkbox" class="toggle" />
+            <input
+              type="checkbox"
+              class="toggle"
+              v-model="selectedSocialFields.instagram"
+            />
           </label>
           <label class="label cursor-pointer">
             <span class="label-text">Twitter / X</span>
-            <input type="checkbox" class="toggle" />
+            <input
+              type="checkbox"
+              class="toggle"
+              v-model="selectedSocialFields.twitter"
+            />
           </label>
           <label class="label cursor-pointer">
             <span class="label-text">Github</span>
-            <input type="checkbox" class="toggle" />
+            <input
+              type="checkbox"
+              class="toggle"
+              v-model="selectedSocialFields.github"
+            />
           </label>
         </div>
 
         <div class="my-4">
-          <label class="input input-bordered my-3 flex items-center gap-2">
+          <label
+            v-if="selectedSocialFields.linkedin"
+            class="input input-bordered my-3 flex items-center gap-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -188,7 +212,10 @@ const handleSubmit = async () => {
             />
           </label>
 
-          <label class="input input-bordered my-3 flex items-center gap-2">
+          <label
+            v-if="selectedSocialFields.facebook"
+            class="input input-bordered my-3 flex items-center gap-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -212,7 +239,10 @@ const handleSubmit = async () => {
             />
           </label>
 
-          <label class="input input-bordered my-3 flex items-center gap-2">
+          <label
+            v-if="selectedSocialFields.instagram"
+            class="input input-bordered my-3 flex items-center gap-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -236,7 +266,10 @@ const handleSubmit = async () => {
             />
           </label>
 
-          <label class="input input-bordered my-3 flex items-center gap-2">
+          <label
+            v-if="selectedSocialFields.twitter"
+            class="input input-bordered my-3 flex items-center gap-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -260,7 +293,10 @@ const handleSubmit = async () => {
             />
           </label>
 
-          <label class="input input-bordered my-3 flex items-center gap-2">
+          <label
+            v-if="selectedSocialFields.github"
+            class="input input-bordered my-3 flex items-center gap-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

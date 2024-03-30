@@ -36,7 +36,7 @@ onMounted(async () => {
           {{ contact?.firstName }} {{ contact?.lastName }}
           <span v-if="contact?.isFavorite">⭐</span>
         </h2>
-        <div class="mt-20 flex flex-col justify-center text-center md:mt-0">
+        <div class="mt-20 flex flex-col justify-around md:mt-0">
           <div v-if="contact?.email" class="flex">
             <p class="text-xl font-bold">Email</p>
             <p class="text-xl">{{ contact?.email }}</p>

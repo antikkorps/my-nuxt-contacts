@@ -78,7 +78,9 @@ const handleDelete = (event: DeleteEvent) => {
         </div>
 
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">Ouvrir</button>
+          <div class="btn btn-primary">
+            <NuxtLink :to="`/contact/${contact?.id}`">Ouvrir</NuxtLink>
+          </div>
           <DeleteContactBtn @delete="handleDelete" :id="contact?.id" />
         </div>
       </div>

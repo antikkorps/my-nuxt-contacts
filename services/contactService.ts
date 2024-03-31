@@ -38,6 +38,16 @@ export async function getUserContactById(id: string) {
   const data = await response.json();
   return data;
 }
+export async function updateContact(contact: any) {
+  const response = await fetch(`/api/v1/contacts/${contact.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(contact),
+  });
+  return response.ok;
+}
 
 export const deleteContact = async (id: string) => {
   const response = await fetch(`/api/v1/contacts/${id}`, { method: "DELETE" });

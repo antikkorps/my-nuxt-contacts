@@ -4,6 +4,8 @@ import { contactService } from "~/services/";
 import type { Contact } from "~/server/utils/types";
 import { useRoute } from "vue-router";
 
+definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
+
 const route = useRoute();
 const contact = ref<Contact | null>(null);
 
@@ -97,10 +99,12 @@ onMounted(async () => {
           </div>
         </div>
         <div class="card-actions my-10 justify-center sm:justify-end">
-          <button class="btn btn-primary">Modifier mon contact</button>
-          <button class="btn btn-warning">
-            <NuxtLink to="#">Supprimer mon contact</NuxtLink>
-          </button>
+          <nuxt-link :to="`/contact/modify-${contact?.id}`">
+            <button class="btn btn-primary">Modifier mon contact</button>
+          </nuxt-link>
+          <NuxtLink to="#">
+            <button class="btn btn-warning">Supprimer mon contact</button>
+          </NuxtLink>
         </div>
       </div>
     </div>

@@ -104,5 +104,6 @@ onMounted(async () => {
         </div>
       </div>
     </div>
+    <NuxtPage />
   </div>
 </template>

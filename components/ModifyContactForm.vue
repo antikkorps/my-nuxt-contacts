@@ -2,6 +2,10 @@
 import { contactService } from "~/services/index";
 import type { Contact } from "~/server/utils/types";
 
+const props = defineProps({
+  id: String,
+});
+
 const selectedSocialFields = ref({
   linkedin: false,
   facebook: false,
@@ -58,9 +62,10 @@ const handleSubmit = async () => {
 };
 
 onMounted(async () => {
-  const contactId = contact.id;
+  const contactId = props.id;
   if (contactId) {
     const response = await contactService.getUserContactById(contactId);
+    console.log(response);
     if (response.status === 200) {
       contact.value = response.body.contact;
     }
@@ -70,7 +75,8 @@ onMounted(async () => {
 <template>
   <div>
     <h1 class="PageTitle">
-      Modifier le contact : {{ contact?.firstName }} {{ contact?.lastName }}
+      Modifier le contact : <br />
+      {{ contact?.firstName }} {{ contact?.lastName }}
     </h1>
     <div class="mb-20 flex w-full justify-center">
       <form @submit.prevent="handleSubmit" class="flex w-full flex-col">

@@ -40,7 +40,28 @@ export default defineEventHandler(async (event) => {
         body: { error: "Forbidden" },
       };
     }
+    // IF UPDATE METHOD
+    if (event.method === "PUT") {
+      const contactData = await readBody(event);
+      try {
+        const updatedContact = await prisma.contact.update({
+          where: { id: contactId },
+          data: contactData,
+        });
 
+        return {
+          status: 200,
+          body: updatedContact,
+        };
+      } catch (error) {
+        return {
+          status: 500,
+          body: { error: "Internal server error" },
+        };
+      }
+    }
+
+    // IF DELETE METHOD
     if (event.method === "DELETE") {
       await prisma.contact.delete({
         where: {

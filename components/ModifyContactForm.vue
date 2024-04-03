@@ -2,6 +2,8 @@
 import { contactService } from "~/services/index";
 import type { Contact } from "~/server/utils/types";
 
+const router = useRouter();
+
 const props = defineProps({
   id: String,
 });
@@ -13,6 +15,8 @@ const selectedSocialFields = ref({
   twitter: false,
   github: false,
 });
+
+const updateStatus = ref<string | null>(null);
 
 const contact = ref<Partial<Contact>>({
   firstName: "",
@@ -54,10 +58,15 @@ const onFileChange = async (event: Event) => {
 const handleSubmit = async () => {
   try {
     await contactService.updateContact(contact.value);
-    console.log("success");
-    console.log(contact.value);
+    updateStatus.value = "success";
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    router.push("/mycontacts");
   } catch (error) {
     console.log("error", error);
+    updateStatus.value = "error";
+    setTimeout(() => {
+      updateStatus.value = null;
+    }, 2000);
   }
 };
 
@@ -411,6 +420,17 @@ onMounted(async () => {
           </div>
         </div>
       </form>
+    </div>
+    <div class="toast toast-center toast-middle">
+      <div class="alert alert-info" v-if="updateStatus === 'success'">
+        <span
+          >la fiche de {{ contact.firstName }} {{ contact.lastName }} a été mise
+          à jour avec succés</span
+        >
+      </div>
+      <div class="alert alert-warning" v-if="updateStatus === 'error'">
+        <span>Il y a eu une erreur lors de la mise à jour.</span>
+      </div>
     </div>
   </div>
 </template>

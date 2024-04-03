@@ -24,7 +24,7 @@ onMounted(async () => {
 <template>
   <div class="pt-4">
     <div
-      class="card relative top-20 mx-auto flex w-full justify-center bg-base-100 shadow-xl sm:w-1/2"
+      class="card relative top-20 mx-auto flex w-full justify-center bg-base-100 shadow-xl sm:w-1/3"
     >
       <div class="card-body">
         <NuxtImg
@@ -38,11 +38,11 @@ onMounted(async () => {
           <span v-if="contact?.isFavorite">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
+              fill="currentColor"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="h-6 w-6"
+              class="h-8 w-8"
             >
               <path
                 stroke-linecap="round"
@@ -53,6 +53,17 @@ onMounted(async () => {
           </span>
         </h2>
         <div class="mt-20 flex flex-col justify-evenly md:mt-0">
+          <div class="flex flex-col rounded-lg sm:flex-row sm:justify-evenly">
+            <div v-if="contact?.jobTitle" class="my-3 grid grid-cols-1">
+              <p class="text-xl font-bold">Profession</p>
+              <p class="text-xl">{{ contact?.jobTitle }}</p>
+            </div>
+            <div v-if="contact?.company" class="my-3 grid grid-cols-1">
+              <p class="text-xl font-bold">Entreprise</p>
+              <p class="text-xl">{{ contact?.company }}</p>
+            </div>
+          </div>
+
           <div v-if="contact?.email" class="mb-3 grid grid-cols-1">
             <p class="text-xl font-bold">Email</p>
             <div class="flex justify-center">
@@ -60,14 +71,7 @@ onMounted(async () => {
               <CopyToClipboard :text="contact?.email" />
             </div>
           </div>
-          <div v-if="contact?.jobTitle" class="my-3 grid grid-cols-1">
-            <p class="text-xl font-bold">Profession</p>
-            <p class="text-xl">{{ contact?.jobTitle }}</p>
-          </div>
-          <div v-if="contact?.company" class="my-3 grid grid-cols-1">
-            <p class="text-xl font-bold">Entreprise</p>
-            <p class="text-xl">{{ contact?.company }}</p>
-          </div>
+
           <div v-if="contact?.phone" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Téléphone</p>
             <p class="text-xl">{{ contact?.phone }}</p>

@@ -52,48 +52,51 @@ onMounted(async () => {
             </svg>
           </span>
         </h2>
-        <div class="mt-20 flex flex-col justify-around md:mt-0">
-          <div v-if="contact?.email" class="flex">
+        <div class="mt-20 flex flex-col justify-evenly md:mt-0">
+          <div v-if="contact?.email" class="mb-3 grid grid-cols-1">
             <p class="text-xl font-bold">Email</p>
-            <p class="text-xl">{{ contact?.email }}</p>
+            <div class="flex justify-center">
+              <p class="text-xl">{{ contact?.email }}</p>
+              <CopyToClipboard :text="contact?.email" />
+            </div>
           </div>
-          <div v-if="contact?.jobTitle" class="flex">
+          <div v-if="contact?.jobTitle" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Profession</p>
             <p class="text-xl">{{ contact?.jobTitle }}</p>
           </div>
-          <div v-if="contact?.company" class="flex">
+          <div v-if="contact?.company" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Entreprise</p>
             <p class="text-xl">{{ contact?.company }}</p>
           </div>
-          <div v-if="contact?.phone" class="flex">
+          <div v-if="contact?.phone" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Téléphone</p>
             <p class="text-xl">{{ contact?.phone }}</p>
           </div>
-          <div v-if="contact?.mobile" class="flex">
+          <div v-if="contact?.mobile" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Mobile</p>
             <p class="text-xl">{{ contact?.mobile }}</p>
           </div>
-          <div v-if="contact?.linkedin" class="flex">
+          <div v-if="contact?.linkedin" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">linkedIn</p>
             <p class="text-xl">{{ contact?.linkedin }}</p>
           </div>
-          <div v-if="contact?.facebook" class="flex">
+          <div v-if="contact?.facebook" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Facebook</p>
             <p class="text-xl">{{ contact?.facebook }}</p>
           </div>
-          <div v-if="contact?.instagram" class="flex">
+          <div v-if="contact?.instagram" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Instagram</p>
             <p class="text-xl">{{ contact?.instagram }}</p>
           </div>
-          <div v-if="contact?.twitter" class="flex">
+          <div v-if="contact?.twitter" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Twitter</p>
             <p class="text-xl">{{ contact?.twitter }}</p>
           </div>
-          <div v-if="contact?.github" class="flex">
+          <div v-if="contact?.github" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Github</p>
             <p class="text-xl">{{ contact?.github }}</p>
           </div>
-          <div v-if="contact?.notes" class="flex">
+          <div v-if="contact?.notes" class="my-3 grid grid-cols-1">
             <p class="text-xl font-bold">Notes</p>
             <p class="text-xl">{{ contact?.notes }}</p>
           </div>

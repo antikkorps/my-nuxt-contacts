@@ -68,6 +68,11 @@ onMounted(async () => {
     console.log(response);
     if (response.status === 200) {
       contact.value = response.body.contact;
+      selectedSocialFields.value.linkedin = !!contact.value.linkedin;
+      selectedSocialFields.value.facebook = !!contact.value.facebook;
+      selectedSocialFields.value.instagram = !!contact.value.instagram;
+      selectedSocialFields.value.twitter = !!contact.value.twitter;
+      selectedSocialFields.value.github = !!contact.value.github;
     }
   }
 });

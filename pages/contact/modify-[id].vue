@@ -5,7 +5,7 @@ const route = useRoute();
 const props = defineProps({
   id: String,
 });
-let id = route.params.id;
+let id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
 </script>
 
 <template>

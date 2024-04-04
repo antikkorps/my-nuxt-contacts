@@ -51,7 +51,9 @@ onMounted(async () => {
           </div>
         </div>
         <div class="card-actions my-10 justify-center sm:justify-end">
-          <button class="btn btn-primary">Modifier mon profil</button>
+          <button class="btn btn-primary">
+            <NuxtLink to="/profile-modify">Modifier mon profil</NuxtLink>
+          </button>
           <button class="btn btn-warning">
             <NuxtLink to="/addcontact">Ajouter un contact</NuxtLink>
           </button>

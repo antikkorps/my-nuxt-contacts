@@ -17,6 +17,7 @@ const selectedSocialFields = ref<SocialFields>({
 });
 
 const updateStatus = ref<string | null>(null);
+const imagePreview = ref<string | null>(null);
 
 const contact = ref<Partial<Contact>>({
   firstName: "",
@@ -44,6 +45,11 @@ const onFileChange = async (event: Event) => {
   }
 
   if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imagePreview.value = e.target?.result as string;
+    };
+    reader.readAsDataURL(file);
     try {
       const imageUrl = await contactService.uploadImageInFilestack(file);
       if (imageUrl && contact.value) {
@@ -100,6 +106,25 @@ onMounted(async () => {
     </h1>
     <div class="mb-20 flex w-full justify-center">
       <form @submit.prevent="handleSubmit" class="flex w-full flex-col">
+        <div class="mb-10 flex flex-col justify-around sm:flex-row">
+          <img
+            :src="imagePreview || contact.image"
+            alt="contact image"
+            class="mx-auto h-20 w-20 rounded-full"
+          />
+
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Image de contact</span>
+            </div>
+            <input
+              @change="onFileChange"
+              type="file"
+              class="file-input file-input-bordered w-full max-w-xs"
+            />
+          </label>
+        </div>
+
         <div class="flex flex-col justify-around sm:flex-row">
           <label class="form-control mx-1 w-full max-w-xs flex-grow">
             <div class="label">
@@ -135,17 +160,6 @@ onMounted(async () => {
               type="email"
               placeholder="eg. me@example.com"
               class="input input-bordered w-full max-w-xs"
-            />
-          </label>
-
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Image de contact</span>
-            </div>
-            <input
-              @change="onFileChange"
-              type="file"
-              class="file-input file-input-bordered w-full max-w-xs"
             />
           </label>
         </div>

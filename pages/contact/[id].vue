@@ -22,7 +22,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="pt-4">
+  <div class="h-screen pt-4">
     <div
       class="card relative top-20 mx-auto flex w-full justify-center bg-base-100 shadow-xl sm:w-1/3"
     >

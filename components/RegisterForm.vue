@@ -5,7 +5,6 @@ const email = ref("");
 const password = ref("");
 
 const handleSubmit = async () => {
-  console.log("success you are registered!");
   //   try {
   //     await signIn("credentials", {
   //       redirect: true,
@@ -17,6 +16,23 @@ const handleSubmit = async () => {
   //   } catch (error) {
   //     console.log("error", error);
   //   }
+  //register using authjs
+  try {
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 };
 </script>
 

@@ -1,4 +1,5 @@
 export interface Contact {
+  [key: string]: string | boolean | string[];
   id: string;
   image: string;
   firstName: string;
@@ -6,14 +7,14 @@ export interface Contact {
   email: string;
   phone: string;
   mobile: string;
-  linkedin: String;
-  facebook: String;
-  instagram: String;
-  twitter: String;
-  github: String;
-  jobTitle: String;
-  company: String;
-  notes: String;
+  linkedin: string;
+  facebook: string;
+  instagram: string;
+  twitter: string;
+  github: string;
+  jobTitle: string;
+  company: string;
+  notes: string;
   userId: string[];
   isFavorite: boolean;
 }
@@ -29,4 +30,13 @@ export interface Button {
   isActive: boolean;
   svgPath: string;
   href: string;
+}
+
+export interface SocialFields {
+  [key: string]: boolean;
+  linkedin: boolean;
+  facebook: boolean;
+  instagram: boolean;
+  twitter: boolean;
+  github: boolean;
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { contactService } from "~/services/index";
-import type { Contact } from "~/server/utils/types";
+import type { Contact, SocialFields } from "~/server/utils/types";
 
 const router = useRouter();
 
@@ -8,7 +8,7 @@ const props = defineProps({
   id: String,
 });
 
-const selectedSocialFields = ref({
+const selectedSocialFields = ref<SocialFields>({
   linkedin: false,
   facebook: false,
   instagram: false,
@@ -67,6 +67,12 @@ const handleSubmit = async () => {
     setTimeout(() => {
       updateStatus.value = null;
     }, 2000);
+  }
+};
+
+const handleCheckboxChange = (field: keyof SocialFields) => {
+  if (!selectedSocialFields.value[field]) {
+    contact.value[field] = "";
   }
 };
 
@@ -219,6 +225,7 @@ onMounted(async () => {
               type="checkbox"
               class="toggle"
               v-model="selectedSocialFields.linkedin"
+              @change="handleCheckboxChange('linkedin')"
             />
           </label>
           <label class="label cursor-pointer">
@@ -227,6 +234,7 @@ onMounted(async () => {
               type="checkbox"
               class="toggle"
               v-model="selectedSocialFields.facebook"
+              @change="handleCheckboxChange('facebook')"
             />
           </label>
           <label class="label cursor-pointer">
@@ -235,6 +243,7 @@ onMounted(async () => {
               type="checkbox"
               class="toggle"
               v-model="selectedSocialFields.instagram"
+              @change="handleCheckboxChange('instagram')"
             />
           </label>
           <label class="label cursor-pointer">
@@ -243,6 +252,7 @@ onMounted(async () => {
               type="checkbox"
               class="toggle"
               v-model="selectedSocialFields.twitter"
+              @change="handleCheckboxChange('twitter')"
             />
           </label>
           <label class="label cursor-pointer">
@@ -251,6 +261,7 @@ onMounted(async () => {
               type="checkbox"
               class="toggle"
               v-model="selectedSocialFields.github"
+              @change="handleCheckboxChange('github')"
             />
           </label>
         </div>

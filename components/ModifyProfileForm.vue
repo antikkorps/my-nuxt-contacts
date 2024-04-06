@@ -10,14 +10,14 @@ const { session, user } = useAuth();
     </h1>
     <div class="my-4">
       <form class="flex flex-col">
-        <label for="firstName">First Name</label>
+        <label for="firstName">Prénom</label>
         <input
           type="text"
           id="firstName"
           name="firstName"
           :value="user?.firstName"
         />
-        <label for="lastName">Last Name</label>
+        <label for="lastName">Nom</label>
         <input
           type="text"
           id="lastName"
@@ -28,7 +28,7 @@ const { session, user } = useAuth();
         <input type="email" id="email" name="email" :value="user?.email" />
         <label for="password">Password</label>
         <input type="password" id="password" name="password" />
-        <button type="submit">Submit</button>
+        <button type="submit">Sauvegarder</button>
       </form>
     </div>
   </div>

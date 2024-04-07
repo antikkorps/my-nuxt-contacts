@@ -128,7 +128,7 @@ onMounted(async () => {
         <div class="flex flex-col justify-around sm:flex-row">
           <label class="form-control mx-1 w-full max-w-xs flex-grow">
             <div class="label">
-              <span class="label-text">Firstname</span>
+              <span class="label-text">Prénom</span>
             </div>
             <input
               v-model="contact.firstName"
@@ -140,7 +140,7 @@ onMounted(async () => {
 
           <label class="form-control mx-1 w-full max-w-xs">
             <div class="label">
-              <span class="label-text">Lastname</span>
+              <span class="label-text">Nom</span>
             </div>
             <input
               v-model="contact.lastName"

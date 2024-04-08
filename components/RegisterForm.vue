@@ -1,37 +1,22 @@
 <script setup lang="ts">
+import { userService } from "~/services";
 const { signIn, session, status, cookies, getProviders } = useAuth();
 
 const email = ref("");
 const password = ref("");
 
 const handleSubmit = async () => {
-  //   try {
-  //     await signIn("credentials", {
-  //       redirect: true,
-  //       email: email.value,
-  //       password: password.value,
-  //       callbackUrl: "/mycontacts",
-  //     });
-  //     console.log("success");
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  //register using authjs
   try {
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email.value,
-        password: password.value,
-      }),
+    await userService.register(email.value, password.value);
+    await signIn("credentials", {
+      email: email.value,
+      password: password.value,
+      redirect: true,
+      callbackUrl: window.location.origin,
     });
-    const data = await response.json();
-    console.log(data);
+    console.log("user registration successful", email.value, password.value);
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
   }
 };
 </script>

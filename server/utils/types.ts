@@ -40,3 +40,18 @@ export interface SocialFields {
   twitter: boolean;
   github: boolean;
 }
+
+export interface User {
+  id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  avatar: string;
+  role: string;
+}
+
+export interface UserRegistration {
+  email: string;
+  password: string;
+}

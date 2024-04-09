@@ -22,6 +22,7 @@ onMounted(async () => {
     >
       <div class="card-body">
         <NuxtImg
+          v-if="session?.user?.avatar"
           :src="session?.user?.avatar"
           class="relative -top-20 mx-auto h-52 w-52 justify-center rounded-full shadow-2xl"
         />

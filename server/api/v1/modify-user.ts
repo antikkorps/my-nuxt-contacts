@@ -1,5 +1,6 @@
 import { getServerSession } from "#auth";
 import { authOptions } from "../auth/[...]";
+import bcrypt from "bcrypt";
 
 import { PrismaClient } from "@prisma/client";
 
@@ -30,6 +31,18 @@ export default defineEventHandler(async (event) => {
 
   try {
     const userUpdates = await readBody(event);
+
+    if (userUpdates.password && userUpdates.password.length > 8) {
+      userUpdates.password = await bcrypt.hash(userUpdates.password, 10);
+    } else {
+      delete userUpdates.password;
+    }
+
+    if (userUpdates.avatar && userUpdates.avatar.length > 0) {
+      userUpdates.avatar = userUpdates.avatar;
+    } else {
+      delete userUpdates.avatar;
+    }
 
     const updatedUser = await prisma.user.update({
       where: { id: userId },

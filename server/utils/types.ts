@@ -43,11 +43,11 @@ export interface SocialFields {
 
 export interface User {
   id: string;
-  email: string;
+  email: string | undefined;
   password: string;
-  firstName: string;
-  lastName: string;
-  avatar: string;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  avatar: string | undefined;
   role: string;
 }
 

@@ -32,6 +32,19 @@ export default defineEventHandler(async (event) => {
   try {
     const userUpdates = await readBody(event);
 
+    if (userUpdates.oldPassword && userToBeModified?.password) {
+      const isPasswordMatch = await bcrypt.compare(
+        userUpdates.oldPassword,
+        userToBeModified?.password,
+      );
+      if (!isPasswordMatch) {
+        return {
+          status: 401,
+          body: { error: "Unauthorized" },
+        };
+      }
+    }
+
     if (userUpdates.password && userUpdates.password.length > 8) {
       userUpdates.password = await bcrypt.hash(userUpdates.password, 10);
     } else {

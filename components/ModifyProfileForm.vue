@@ -1,4 +1,5 @@
 <script setup lang="ts">
+//TODO: add message for the new password to follow the rules in the form (REGEX)
 import { userService, imageService } from "~/services";
 import type { User } from "~/server/utils/types";
 
@@ -13,6 +14,7 @@ const updatedContact = ref<User>({
   email: user.value?.email,
 });
 const changePassword = ref(false);
+const oldPassword = ref("");
 const newPassword = ref("");
 const confirmPassword = ref("");
 const passwordsMatch = ref(true);
@@ -137,7 +139,19 @@ const handleSubmit = async () => {
         <div v-if="changePassword">
           <label class="form-control mx-auto w-full max-w-xs">
             <div class="label">
-              <span class="label-text">Mot de passe</span>
+              <span class="label-text">Ancien Mot de passe</span>
+            </div>
+            <input
+              type="password"
+              placeholder="Votre mot de passe"
+              class="input input-bordered mx-auto w-full max-w-xs"
+              v-model="oldPassword"
+            />
+          </label>
+
+          <label class="form-control mx-auto w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Nouveau Mot de passe</span>
             </div>
             <input
               type="password"

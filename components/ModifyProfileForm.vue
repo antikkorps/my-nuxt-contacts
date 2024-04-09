@@ -1,15 +1,42 @@
 <script setup lang="ts">
-import { userService } from "~/services";
+import { userService, imageService } from "~/services";
 import type { User } from "~/server/utils/types";
 definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
 
 const { session, user } = useAuth();
+const imagePreview = ref<string | null>(null);
 const updatedContact = ref<User>({
+  avatar: imagePreview,
   firstName: user.value?.firstName,
   lastName: user.value?.lastName,
   email: user.value?.email,
   password: "",
 });
+
+const onFileChange = async (event: Event) => {
+  const inputElement = event.target as HTMLInputElement;
+  let file: File | null = null;
+
+  if (inputElement && inputElement.files && inputElement.files.length > 0) {
+    file = inputElement.files[0];
+  }
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imagePreview.value = e.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+    try {
+      const imageUrl = await imageService.uploadImageInFilestack(file);
+      if (imageUrl && user.value) {
+        user.value.avatar = imageUrl;
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  }
+};
 
 const handleSubmit = async () => {
   try {
@@ -31,6 +58,25 @@ const handleSubmit = async () => {
         class="mx-auto flex flex-col justify-center"
         @submit.prevent="handleSubmit"
       >
+        <div class="mx-auto mb-10 flex flex-col justify-around">
+          <img
+            :src="imagePreview || user?.avatar"
+            alt="contact image"
+            class="mx-auto h-20 w-20 rounded-full"
+          />
+
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Image de contact</span>
+            </div>
+            <input
+              @change="onFileChange"
+              type="file"
+              class="file-input file-input-bordered w-full max-w-xs"
+            />
+          </label>
+        </div>
+
         <label class="form-control mx-auto w-full max-w-xs">
           <div class="label">
             <span class="label-text">Prénom</span>

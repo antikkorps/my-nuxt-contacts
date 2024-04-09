@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { contactService } from "~/services/index";
+import { contactService, imageService } from "~/services/index";
 import type { Contact, SocialFields } from "~/server/utils/types";
 
 const router = useRouter();
@@ -51,7 +51,7 @@ const onFileChange = async (event: Event) => {
     };
     reader.readAsDataURL(file);
     try {
-      const imageUrl = await contactService.uploadImageInFilestack(file);
+      const imageUrl = await imageService.uploadImageInFilestack(file);
       if (imageUrl && contact.value) {
         contact.value.image = imageUrl;
       }

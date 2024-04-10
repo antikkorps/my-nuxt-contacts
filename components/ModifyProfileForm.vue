@@ -1,5 +1,4 @@
 <script setup lang="ts">
-//TODO: add message for the new password to follow the rules in the form (REGEX)
 import { userService, imageService } from "~/services";
 import type { User } from "~/server/utils/types";
 
@@ -7,12 +6,12 @@ definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
 
 const { session, user } = useAuth();
 const imagePreview = ref<string | null>(null);
-const updatedContact = ref<User>({
-  avatar: imagePreview,
+const updatedContact = computed(() => ({
+  avatar: imagePreview.value,
   firstName: user.value?.firstName,
   lastName: user.value?.lastName,
   email: user.value?.email,
-});
+}));
 const changePassword = ref(false);
 const oldPassword = ref("");
 const newPassword = ref("");
@@ -88,6 +87,14 @@ const checkPassword = () => {
 const passwordIsValid = computed(() => {
   return Object.values(passwordErrors.value).every((error) => error === "");
 });
+
+const reinitValuesOnUnchecked = () => {
+  if (!changePassword.value) {
+    newPassword.value = "";
+    passwordTouched.value = false;
+    confirmPassword.value = "";
+  }
+};
 
 const handleSubmit = async () => {
   if (newPassword.value !== confirmPassword.value) {
@@ -178,7 +185,12 @@ const handleSubmit = async () => {
         <div class="form-control mx-auto my-5 w-full max-w-xs">
           <label class="label cursor-pointer">
             <span class="label-text">Modifier le mots de passe ?</span>
-            <input type="checkbox" v-model="changePassword" class="checkbox" />
+            <input
+              type="checkbox"
+              v-model="changePassword"
+              @change="reinitValuesOnUnchecked"
+              class="checkbox"
+            />
           </label>
         </div>
         <div v-if="changePassword">

@@ -159,6 +159,9 @@ const handleSubmit = async () => {
               class="input input-bordered mx-auto w-full max-w-xs"
               v-model="newPassword"
             />
+            <div class="label">
+              <span class="label-text-alt">Ici le message</span>
+            </div>
           </label>
 
           <label class="form-control mx-auto w-full max-w-xs">

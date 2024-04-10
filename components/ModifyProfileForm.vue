@@ -16,6 +16,12 @@ const updatedContact = ref<User>({
 const changePassword = ref(false);
 const oldPassword = ref("");
 const newPassword = ref("");
+const passwordErrors = ref({
+  minLength: "Le mot de passe doit contenir au moins 8 caractères",
+  upperCase: "Le mot de passe doit contenir au moins une majuscule",
+  specialChar: "Le mot de passe doit contenir au moins un caractère spécial",
+});
+const passwordTouched = ref(false);
 const confirmPassword = ref("");
 const passwordsMatch = ref(true);
 
@@ -43,6 +49,45 @@ const onFileChange = async (event: Event) => {
     }
   }
 };
+
+const checkPassword = () => {
+  passwordTouched.value = true;
+
+  const hasUpperCase = /[A-Z]/.test(newPassword.value);
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(newPassword.value);
+  const hasMinLength = newPassword.value.length >= 8;
+
+  if (hasMinLength) {
+    passwordErrors.value.minLength = "";
+  } else {
+    passwordErrors.value.minLength =
+      "Le mot de passe doit contenir au moins 8 caractères";
+  }
+
+  if (hasUpperCase) {
+    passwordErrors.value.upperCase = "";
+  } else {
+    passwordErrors.value.upperCase =
+      "Le mot de passe doit contenir au moins une majuscule";
+  }
+
+  if (hasSpecialChar) {
+    passwordErrors.value.specialChar = "";
+  } else {
+    passwordErrors.value.specialChar =
+      "Le mot de passe doit contenir au moins un caractère spécial";
+  }
+
+  if (newPassword.value === "") {
+    passwordErrors.value.minLength = "";
+    passwordErrors.value.upperCase = "";
+    passwordErrors.value.specialChar = "";
+  }
+};
+
+const passwordIsValid = computed(() => {
+  return Object.values(passwordErrors.value).every((error) => error === "");
+});
 
 const handleSubmit = async () => {
   if (newPassword.value !== confirmPassword.value) {
@@ -158,9 +203,17 @@ const handleSubmit = async () => {
               placeholder="Votre mot de passe"
               class="input input-bordered mx-auto w-full max-w-xs"
               v-model="newPassword"
+              @input="checkPassword"
             />
-            <div class="label">
-              <span class="label-text-alt">Ici le message</span>
+            <div class="flex flex-col">
+              <span
+                class="label-text-alt"
+                v-for="(error, key) in passwordErrors"
+                :key="key"
+                v-if="passwordTouched"
+              >
+                {{ error }}
+              </span>
             </div>
           </label>
 

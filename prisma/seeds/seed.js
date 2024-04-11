@@ -1,16 +1,16 @@
-import { PrismaClient } from "@prisma/client"
-import bcrypt from "bcrypt"
-import dotenv from "dotenv"
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function seed() {
   try {
-    const password = process.env.USERS_SEED_PASSWORD
+    const password = process.env.USERS_SEED_PASSWORD;
     if (!password) {
-      throw new Error("USER_PASSWORD is not defined")
+      throw new Error("USER_PASSWORD is not defined");
     }
     // Create users
     const user1 = await prisma.user.create({
@@ -21,7 +21,7 @@ async function seed() {
         lastName: "Doe",
         avatar: "https://i.pravatar.cc/300",
       },
-    })
+    });
 
     const user2 = await prisma.user.create({
       data: {
@@ -31,7 +31,17 @@ async function seed() {
         lastName: "Smith",
         avatar: "https://i.pravatar.cc/300",
       },
-    })
+    });
+
+    const testUser = await prisma.user.create({
+      data: {
+        email: "testuser@example.com",
+        password: await bcrypt.hash(password, 10),
+        firstName: "Test",
+        lastName: "User",
+        avatar: "https://i.pravatar.cc/300",
+      },
+    });
 
     // Create contacts
     await prisma.contact.createMany({
@@ -50,14 +60,14 @@ async function seed() {
         },
         // Add more contacts here
       ],
-    })
+    });
 
-    console.log("Seed data created successfully!")
+    console.log("Seed data created successfully!");
   } catch (error) {
-    console.error("Error seeding data:", error)
+    console.error("Error seeding data:", error);
   } finally {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   }
 }
 
-seed()
+seed();

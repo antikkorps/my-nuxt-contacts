@@ -64,7 +64,7 @@ const handleSubmit = async () => {
             </label>
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary">Se connecter</button>
+            <button type="submit" class="btn btn-primary">Se connecter</button>
           </div>
         </form>
       </div>

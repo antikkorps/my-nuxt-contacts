@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@hebilicious/authjs-nuxt",
     "@nuxt/image",
+    "@nuxt/test-utils",
   ],
   alias: {
     cookie: resolve(__dirname, "node_modules/cookie"),

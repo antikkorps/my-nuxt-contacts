@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { contactService } from "~/services/index";
+import { contactService, imageService } from "~/services/index";
 import type { Contact } from "~/server/utils/types";
 
+const router = useRouter();
 const selectedSocialFields = ref({
   linkedin: false,
   facebook: false,
@@ -37,7 +38,7 @@ const onFileChange = async (event: Event) => {
 
   if (file) {
     try {
-      const imageUrl = await contactService.uploadImageInFilestack(file);
+      const imageUrl = await imageService.uploadImageInFilestack(file);
       if (imageUrl && newContact.value) {
         newContact.value.image = imageUrl;
       }
@@ -52,6 +53,7 @@ const handleSubmit = async () => {
     await contactService.addContact(newContact.value);
     console.log("success");
     console.log(newContact.value);
+    router.push("/mycontacts");
   } catch (error) {
     console.log("error", error);
   }
@@ -382,7 +384,9 @@ const handleSubmit = async () => {
         <div
           class="my-6 flex flex-wrap items-start justify-center sm:justify-end"
         >
-          <button class="btn btn-primary mx-1">Sauvegarder</button>
+          <button type="submit" class="btn btn-primary mx-1">
+            Sauvegarder
+          </button>
           <div class="btn btn-outline btn-error mx-1">
             <NuxtLink to="/mycontacts">Annuler</NuxtLink>
           </div>

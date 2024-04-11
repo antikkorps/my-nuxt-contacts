@@ -64,3 +64,29 @@ test("should go to profile page", async () => {
 
   await browser.close();
 });
+
+test("should load the add contact page", async () => {
+  const browser = await chromium.launch();
+
+  const page = await browser.newPage();
+
+  await page.goto("http://localhost:3000/add-contact");
+
+  const form = await page.$("form");
+  expect(form).toBeTruthy();
+
+  await browser.close();
+});
+
+test("should add a new contact", async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  await page.goto("http://localhost:3000/add-contact");
+  await page.fill('input[name="firstName"]', "John");
+  await page.fill('input[name="lastName"]', "Zetest");
+  await page.fill('input[name="email"]', "john.zetest@test.com");
+  await page.click('button[type="submit"]');
+  await page.goto("http://localhost:3000/mycontacts");
+  await browser.close();
+});

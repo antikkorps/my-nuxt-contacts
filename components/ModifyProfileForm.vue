@@ -6,12 +6,21 @@ definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
 
 const { session, user } = useAuth();
 const imagePreview = ref<string | null>(null);
-const updatedContact = computed(() => ({
-  avatar: imagePreview.value,
-  firstName: user.value?.firstName,
-  lastName: user.value?.lastName,
-  email: user.value?.email,
-}));
+const updatedContact = computed(() => {
+  if (!user.value?.id || !user.value.role || !user.value?.email) {
+    throw new Error("User id, role or email is not defined");
+  }
+
+  return {
+    id: user.value.id,
+    role: user.value?.role,
+    avatar: imagePreview.value || "",
+    firstName: user.value?.firstName,
+    lastName: user.value?.lastName,
+    email: user.value.email,
+    password: "",
+  };
+});
 const changePassword = ref(false);
 const oldPassword = ref("");
 const newPassword = ref("");

@@ -82,10 +82,20 @@ test("should add a new contact", async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
+  await page.goto("http://localhost:3000/login");
+
+  await page.fill("input[type=email]", "testuser@example.com");
+  await page.fill("input[type=password]", "password");
+  await page.click("button[type=submit]");
+  page.waitForTimeout(5000);
+  await page.goto("http://localhost:3000/mycontacts");
+  await page.waitForLoadState();
+  console.log("After login, url is:", page.url());
+
   await page.goto("http://localhost:3000/add-contact");
-  await page.fill('input[name="firstName"]', "John");
-  await page.fill('input[name="lastName"]', "Zetest");
-  await page.fill('input[name="email"]', "john.zetest@test.com");
+  await page.fill("#firstName", "John");
+  await page.fill("#lastName", "Zetest");
+  await page.fill("#email", "john.zetest@test.com");
   await page.click('button[type="submit"]');
   await page.goto("http://localhost:3000/mycontacts");
   await browser.close();

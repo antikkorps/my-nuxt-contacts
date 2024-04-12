@@ -72,6 +72,7 @@ const handleSubmit = async () => {
             <input
               v-model="newContact.firstName"
               type="text"
+              id="firstName"
               placeholder="eg. John"
               class="input input-bordered w-full max-w-xs"
             />
@@ -84,6 +85,7 @@ const handleSubmit = async () => {
             <input
               v-model="newContact.lastName"
               type="text"
+              id="lastName"
               placeholder="eg. Doe"
               class="input input-bordered w-full max-w-xs"
             />
@@ -97,6 +99,7 @@ const handleSubmit = async () => {
             <input
               v-model="newContact.email"
               type="email"
+              id="email"
               placeholder="eg. me@example.com"
               class="input input-bordered w-full max-w-xs"
             />

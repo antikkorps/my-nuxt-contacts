@@ -78,25 +78,30 @@ test("should load the add contact page", async () => {
   await browser.close();
 });
 
+//TODO CORRECT THE NEXT TEST WHICH IS FAILED
 test("should add a new contact", async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
+  const email = await page.$("input[type=email]");
+  const password = await page.$("input[type=password]");
+  const submit = await page.$("button[type=submit]");
   await page.goto("http://localhost:3000/login");
 
-  await page.fill("input[type=email]", "testuser@example.com");
-  await page.fill("input[type=password]", "password");
-  await page.click("button[type=submit]");
-  page.waitForTimeout(5000);
-  await page.goto("http://localhost:3000/mycontacts");
-  await page.waitForLoadState();
-  console.log("After login, url is:", page.url());
+  await page.fill(`${email}`, "testuser@example.com");
+  await page.fill(`${password}`, "password");
+  await page.click(`${submit}`);
+  await page.goto("http://localhost:3000/add-contact");
+
+  await page.waitForLoadState("networkidle");
+  console.log(`Current URL after login: ${page.url()}`);
 
   await page.goto("http://localhost:3000/add-contact");
   await page.fill("#firstName", "John");
   await page.fill("#lastName", "Zetest");
   await page.fill("#email", "john.zetest@test.com");
   await page.click('button[type="submit"]');
+
   await page.goto("http://localhost:3000/mycontacts");
   await browser.close();
 });

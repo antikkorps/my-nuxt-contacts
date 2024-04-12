@@ -46,6 +46,7 @@ const handleSignout = async () => {
             v-if="session"
             @click="handleSignout"
             class="btn btn-primary mx-2 flex justify-end"
+            id="logout"
           >
             Logout
           </div>

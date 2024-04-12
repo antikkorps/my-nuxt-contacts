@@ -1,24 +1,43 @@
 import { getServerSession } from "#auth";
 import { authOptions } from "../../auth/[...]";
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
+  const userId = session?.user?.id;
 
-  if (!session) {
+  if (!session || !userId) {
     return {
       status: 401,
       body: { error: "Unauthorized" },
     };
   }
 
-  const userId = session.user?.id;
   const contactData = await readBody(event);
 
   try {
+    const existingContact = await prisma.contact.findUnique({
+      where: {
+        userId_email: {
+          userId: userId,
+          email: contactData.email,
+        },
+      },
+    });
+
+    if (existingContact) {
+      const errorMessage = `A contact with email ${contactData.email} already exists.`;
+      return {
+        status: 400,
+        body: {
+          error: errorMessage,
+        },
+      };
+    }
+
     const newContact = await prisma.contact.create({
       data: {
         userId: userId,
@@ -29,10 +48,7 @@ export default defineEventHandler(async (event) => {
       status: 200,
       body: newContact,
     };
-  } catch (error) {
-    return {
-      status: 500,
-      body: { error: "There is an error adding the new contact" },
-    };
+  } catch (error: any) {
+    let errorMessage = "There was an error adding the new contact";
   }
 });

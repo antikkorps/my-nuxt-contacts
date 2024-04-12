@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { contactService, imageService } from "~/services/index";
-import type { Contact } from "~/server/utils/types";
+import type { Contact, HttpError } from "~/server/utils/types";
 
 const router = useRouter();
 const selectedSocialFields = ref({
@@ -28,6 +28,10 @@ const newContact = ref<Partial<Contact>>({
   isFavorite: false,
 });
 
+const error = ref<string | null>(null);
+let errorMessage = ref("");
+let isRequestSuccessful = ref(false);
+
 const onFileChange = async (event: Event) => {
   const inputElement = event.target as HTMLInputElement;
   let file: File | null = null;
@@ -51,18 +55,26 @@ const onFileChange = async (event: Event) => {
 const handleSubmit = async () => {
   try {
     await contactService.addContact(newContact.value);
-    console.log("success");
-    console.log(newContact.value);
-    router.push("/mycontacts");
+    isRequestSuccessful.value = true;
   } catch (error) {
-    console.log("error", error);
+    isRequestSuccessful.value = false;
+    const err = error as HttpError;
+    if (err.response && err.response.status === 400) {
+      error = err.response.data.error;
+      console.error(err);
+    } else {
+      error = "An unexpected error occurred.";
+    }
+  }
+  if (isRequestSuccessful) {
+    router.push("/mycontacts");
   }
 };
 </script>
 <template>
   <div>
     <h1 class="PageTitle">Add a contact</h1>
-    <div class="mb-20 flex w-full justify-center">
+    <div class="mb-6 flex w-full justify-center">
       <form @submit.prevent="handleSubmit" class="flex w-full flex-col">
         <div class="flex flex-col justify-around sm:flex-row">
           <label class="form-control mx-1 w-full max-w-xs flex-grow">
@@ -395,6 +407,22 @@ const handleSubmit = async () => {
           </div>
         </div>
       </form>
+    </div>
+    <div role="alert" class="alert alert-error" v-if="error">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 shrink-0 stroke-current"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <span>{{ error }}</span>
     </div>
   </div>
 </template>

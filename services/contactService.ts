@@ -6,6 +6,16 @@ export const addContact = async (contact: any) => {
     },
     body: JSON.stringify(contact),
   });
+
+  if (!response.ok) {
+    const errorBody = await response.json();
+    if (errorBody.message.includes("P2002")) {
+      throw new Error(`A contact with email ${contact.email} already exists.`);
+    } else {
+      throw new Error(errorBody.error);
+    }
+  }
+
   return response.ok;
 };
 

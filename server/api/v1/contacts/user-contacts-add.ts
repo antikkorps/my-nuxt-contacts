@@ -4,7 +4,7 @@ import { authOptions } from "../../auth/[...]";
 import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
+//TODO: Find why error does not return as expected
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
   const userId = session?.user?.id;

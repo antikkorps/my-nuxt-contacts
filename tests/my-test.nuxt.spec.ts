@@ -83,14 +83,11 @@ test("should add a new contact", async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  const email = await page.$("input[type=email]");
-  const password = await page.$("input[type=password]");
-  const submit = await page.$("button[type=submit]");
   await page.goto("http://localhost:3000/login");
 
-  await page.fill(`${email}`, "testuser@example.com");
-  await page.fill(`${password}`, "password");
-  await page.click(`${submit}`);
+  await page.fill("input[type=email]","testuser@example.com");
+  await page.fill("input[type=password]" , "password");
+  await page.click("button[type=submit]");
   await page.goto("http://localhost:3000/add-contact");
 
   await page.waitForLoadState("networkidle");

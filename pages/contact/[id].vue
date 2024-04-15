@@ -23,8 +23,27 @@ onMounted(async () => {
 
 <template>
   <div class="h-screen pt-4">
+    <div class="mx-auto mb-10 mt-6 pl-4 sm:w-1/3">
+      <nuxt-link to="/mycontacts" class="flex align-middle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="h-6 w-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+          />
+        </svg>
+        <span class="ml-2">Retour à la liste</span>
+      </nuxt-link>
+    </div>
     <div
-      class="card relative top-20 mx-auto flex w-full justify-center bg-base-100 shadow-xl sm:w-1/3"
+      class="card relative top-10 mx-auto flex w-full justify-center bg-base-100 shadow-xl sm:w-1/3"
     >
       <div class="card-body">
         <NuxtImg

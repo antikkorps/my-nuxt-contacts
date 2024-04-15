@@ -31,6 +31,7 @@ const newContact = ref<Partial<Contact>>({
 const error = ref<string | null>(null);
 let errorMessage = ref("");
 let isRequestSuccessful = ref(false);
+const response = ref<any>(null);
 
 const onFileChange = async (event: Event) => {
   const inputElement = event.target as HTMLInputElement;
@@ -54,8 +55,9 @@ const onFileChange = async (event: Event) => {
 
 const handleSubmit = async () => {
   try {
-    await contactService.addContact(newContact.value);
+    response.value = await contactService.addContact(newContact.value);
     isRequestSuccessful.value = true;
+    console.log(response.value);
   } catch (error) {
     isRequestSuccessful.value = false;
     const err = error as HttpError;
@@ -67,7 +69,9 @@ const handleSubmit = async () => {
     }
   }
   if (isRequestSuccessful) {
-    router.push("/mycontacts");
+    if (response && response.value) {
+      router.push(`/contact/${response.value.body.id}`);
+    }
   }
 };
 </script>

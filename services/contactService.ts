@@ -16,7 +16,8 @@ export const addContact = async (contact: any) => {
     }
   }
 
-  return response.ok;
+  const data = await response.json();
+  return data;
 };
 
 export const getUserContacts = async () => {

@@ -32,7 +32,7 @@ const handleDeleteContact = async () => {
 
 <template>
   <div>
-    <button class="btn btn-primary" @click="handleDeleteContact">
+    <button class="deleteButton btn btn-warning" @click="handleDeleteContact">
       Supprimer
     </button>
   </div>

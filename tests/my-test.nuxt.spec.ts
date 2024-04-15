@@ -78,7 +78,6 @@ test("should load the add contact page", async () => {
   await browser.close();
 });
 
-//TODO CORRECT THE NEXT TEST WHICH IS FAILED
 test("should add a new contact", async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
@@ -108,9 +107,48 @@ test("should add a new contact", async () => {
 
   await page.click('button[type="submit"]');
 
-  await page.goto("http://localhost:3000/mycontacts");
-  await page.waitForSelector('button[id="delete"]');
+  await browser.close();
+});
 
-  await page.click('button[id="delete"]');
+test("should delete a contact", async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  await page.goto("http://localhost:3000/login");
+
+  await page.waitForSelector("input[type=email]");
+  await page.waitForSelector("input[type=password]");
+
+  await page.fill("input[type=email]", "testuser@example.com");
+  await page.fill("input[type=password]", "password");
+
+  await page.click("button[type=submit]");
+
+  await page.goto("http://localhost:3000/mycontacts");
+
+  // select the card with text John Zetest
+
+  await page.waitForSelector('button[class="deleteButton"]');
+
+  const cards = await page.$$(".card");
+  for (let card of cards) {
+    const title = await card.$eval(".card-title", (el) => el.textContent);
+    if (title === "John Zetest") {
+      const deleteButton = await card.$(".deleteButton");
+      if (deleteButton) {
+        await deleteButton.click();
+        break;
+      }
+    }
+  }
+
+  // Check that the contact is deleted
+  const deletedCards = await page.$$(".card");
+  for (let card of deletedCards) {
+    const title = await card.$eval(".card-title", (el) => el.textContent);
+    if (title === "John Zetest") {
+      throw new Error("Contact was not deleted");
+    }
+  }
   await browser.close();
 });

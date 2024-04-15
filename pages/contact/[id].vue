@@ -2,12 +2,21 @@
 import { ref, onMounted } from "vue";
 import { contactService } from "~/services/";
 import type { Contact } from "~/server/utils/types";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } });
 
+const emit = defineEmits(["delete"]);
+const router = useRouter();
 const route = useRoute();
 const contact = ref<Contact | null>(null);
+
+const handleDeleteContact = () => {
+  if (contact.value) {
+    emit("delete", contact.value.id);
+    router.push("/mycontacts");
+  }
+};
 
 onMounted(async () => {
   let id = route.params.id;
@@ -128,9 +137,7 @@ onMounted(async () => {
           <nuxt-link :to="`/contact/modify-${contact?.id}`">
             <button class="btn btn-primary">Modifier mon contact</button>
           </nuxt-link>
-          <NuxtLink to="#">
-            <button class="btn btn-warning">Supprimer mon contact</button>
-          </NuxtLink>
+          <DeleteContactBtn @click="handleDeleteContact" :id="contact?.id" />
         </div>
       </div>
     </div>

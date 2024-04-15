@@ -85,20 +85,32 @@ test("should add a new contact", async () => {
 
   await page.goto("http://localhost:3000/login");
 
-  await page.fill("input[type=email]","testuser@example.com");
-  await page.fill("input[type=password]" , "password");
+  await page.waitForSelector("input[type=email]");
+  await page.waitForSelector("input[type=password]");
+
+  await page.fill("input[type=email]", "testuser@example.com");
+  await page.fill("input[type=password]", "password");
+
   await page.click("button[type=submit]");
+  await page.screenshot({ path: "screenshot.png", fullPage: true });
+  // expect redirect to /mycontacts
+  await page.goto("http://localhost:3000/mycontacts");
+
   await page.goto("http://localhost:3000/add-contact");
 
-  await page.waitForLoadState("networkidle");
-  console.log(`Current URL after login: ${page.url()}`);
+  await page.waitForSelector("#firstName");
+  await page.waitForSelector("#lastName");
+  await page.waitForSelector("#email");
 
-  await page.goto("http://localhost:3000/add-contact");
   await page.fill("#firstName", "John");
   await page.fill("#lastName", "Zetest");
   await page.fill("#email", "john.zetest@test.com");
+
   await page.click('button[type="submit"]');
 
   await page.goto("http://localhost:3000/mycontacts");
+  await page.waitForSelector('button[id="delete"]');
+
+  await page.click('button[id="delete"]');
   await browser.close();
 });

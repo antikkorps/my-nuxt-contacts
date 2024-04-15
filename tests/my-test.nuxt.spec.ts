@@ -128,14 +128,17 @@ test("should delete a contact", async () => {
 
   // select the card with text John Zetest
 
-  await page.waitForSelector('button[class="deleteButton"]');
-
   const cards = await page.$$(".card");
   for (let card of cards) {
-    const title = await card.$eval(".card-title", (el) => el.textContent);
+    await card.waitForSelector(".card-body .card-title");
+    const title = await card.$eval(
+      ".card-body .card-title",
+      (el) => el.textContent,
+    );
     if (title === "John Zetest") {
-      const deleteButton = await card.$(".deleteButton");
+      const deleteButton = await card.$("> .deleteButton");
       if (deleteButton) {
+        await deleteButton.waitForElementState("visible");
         await deleteButton.click();
         break;
       }

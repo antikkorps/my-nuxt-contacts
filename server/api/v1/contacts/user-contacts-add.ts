@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     });
 
     if (existingContact) {
-      const errorMessage = `A contact with email ${contactData.email} already exists.`;
+      const errorMessage = `un contact avec l'email ${contactData.email} existe déjà !!`;
       return {
         status: 400,
         body: {

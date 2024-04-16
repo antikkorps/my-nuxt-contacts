@@ -64,3 +64,10 @@ export interface HttpError extends Error {
     };
   };
 }
+
+export interface ResponseValue {
+  body: {
+    id: string;
+    error: string;
+  };
+}

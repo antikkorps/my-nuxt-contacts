@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { contactService, imageService } from "~/services/index";
-import type { Contact, HttpError } from "~/server/utils/types";
+import type { Contact, HttpError, ResponseValue } from "~/server/utils/types";
 
 const router = useRouter();
 const selectedSocialFields = ref({
@@ -29,9 +29,10 @@ const newContact = ref<Partial<Contact>>({
 });
 
 const error = ref<string | null>(null);
-let errorMessage = ref("");
-let isRequestSuccessful = ref(false);
-const response = ref<any>(null);
+const errorMessage: Ref<string | undefined> = ref("");
+const isRequestSuccessful = ref(false);
+const displayError = ref(false);
+const response = ref<ResponseValue | null>(null);
 
 const onFileChange = async (event: Event) => {
   const inputElement = event.target as HTMLInputElement;
@@ -55,30 +56,27 @@ const onFileChange = async (event: Event) => {
 
 const handleSubmit = async () => {
   try {
-    response.value = await contactService.addContact(newContact.value);
+    const response = await contactService.addContact(newContact.value);
+    if (response.body && response.body.error) {
+      throw new Error(response.body.error);
+    }
     isRequestSuccessful.value = true;
-    console.log(response.value);
+    router.push(`/contact/${response.body.id}`);
   } catch (error) {
+    const err = error as Error;
     isRequestSuccessful.value = false;
-    const err = error as HttpError;
-    if (err.response && err.response.status === 400) {
-      error = err.response.data.error;
-      console.error(err);
-    } else {
-      error = "An unexpected error occurred.";
-    }
-  }
-  if (isRequestSuccessful) {
-    if (response && response.value) {
-      router.push(`/contact/${response.value.body.id}`);
-    }
+    errorMessage.value = err.message;
+    displayError.value = true;
+    setTimeout(() => {
+      displayError.value = false;
+    }, 3500);
   }
 };
 </script>
 <template>
   <div>
     <h1 class="PageTitle">Add a contact</h1>
-    <div class="mb-6 flex w-full justify-center">
+    <div class="mb-2 flex w-full justify-center">
       <form @submit.prevent="handleSubmit" class="flex w-full flex-col">
         <div class="flex flex-col justify-around sm:flex-row">
           <label class="form-control mx-1 w-full max-w-xs flex-grow">
@@ -412,7 +410,7 @@ const handleSubmit = async () => {
         </div>
       </form>
     </div>
-    <div role="alert" class="alert alert-error" v-if="error">
+    <div role="alert" class="alert alert-error" v-if="displayError">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-6 w-6 shrink-0 stroke-current"
@@ -426,7 +424,7 @@ const handleSubmit = async () => {
           d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
-      <span>{{ error }}</span>
+      <span>{{ error || errorMessage }}</span>
     </div>
   </div>
 </template>

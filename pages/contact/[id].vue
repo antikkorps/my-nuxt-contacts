@@ -10,6 +10,7 @@ const emit = defineEmits(["delete"]);
 const router = useRouter();
 const route = useRoute();
 const contact = ref<Contact | null>(null);
+const qrData = "https://fliqr.codes";
 
 const handleDeleteContact = () => {
   if (contact.value) {

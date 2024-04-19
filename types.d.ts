@@ -1,15 +1,15 @@
-import { Avatar } from "./.nuxt/components.d"
+import { Avatar } from "./.nuxt/components.d";
 declare module "@auth/core/types" {
   interface Session {
-    user?: User
+    user?: User;
   }
   interface User {
-    id: string
-    firstName: string
-    lastName: string
-    avatar: string
-    role: string
+    id: string;
+    firstName: string;
+    lastName: string;
+    avatar: string;
+    role: string;
   }
 }
 
-export {}
+export {};
